@@ -7,7 +7,6 @@ class Header extends Component {
   render() {
     const { email, nameState, score } = this.props;
     const emailCrypto = md5(email).toString();
-    console.log(emailCrypto);
     return (
       <header>
         <img

@@ -38,7 +38,6 @@ class Login extends React.Component {
   }
 
   playFunction = async () => {
-    console.log('oi');
     const { name, email } = this.state;
     const { userDispatch, history } = this.props;
     const token = await getToken();
