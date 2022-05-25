@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 // import getToken from '../../functions/api/getToken';
 // import shuffleArray from '../../functions/randomArray';
 import './Game.css';
+import Timer from '../../components/Timer';
 
 class Game extends React.Component {
   constructor() {
@@ -67,8 +68,9 @@ class Game extends React.Component {
     const { questions, answers, category, question, colorBorder } = this.state;
     return (
       <article>
+        <Timer />
         <Header />
-        { questions === {} ? <h1>Loading</h1> : (
+        {questions === {} ? <h1>Loading</h1> : (
           <section>
             <h1 data-testid="question-category">
               {category}
@@ -77,15 +79,15 @@ class Game extends React.Component {
               {question}
             </h3>
             <section data-testid="answer-options">
-              { answers.map((a, i) => (
+              {answers.map((a, i) => (
                 <button
-                  data-testid={ a.id }
-                  key={ i }
+                  data-testid={a.id}
+                  key={i}
                   type="button"
-                  className={ colorBorder && answers
+                  className={colorBorder && answers
                     .some((element) => element.correct_answer === a)
-                    ? 'green' : 'red' }
-                  onClick={ () => this.handleClick() }
+                    ? 'green' : 'red'}
+                  onClick={() => this.handleClick()}
                 >
                   {a.answer}
                 </button>

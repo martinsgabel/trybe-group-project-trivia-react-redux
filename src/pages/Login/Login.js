@@ -55,10 +55,10 @@ class Login extends React.Component {
           <input
             type="text"
             name="name"
-            value={ name }
+            value={name}
             data-testid="input-player-name"
             id="input-player-name"
-            onChange={ this.handleChange }
+            onChange={this.handleChange}
           />
         </label>
         <label htmlFor="input-gravatar-email">
@@ -66,17 +66,17 @@ class Login extends React.Component {
           <input
             type="email"
             name="email"
-            value={ email }
+            value={email}
             data-testid="input-gravatar-email"
             id="input-gravatar-email"
-            onChange={ this.handleChange }
+            onChange={this.handleChange}
           />
         </label>
         <button
           type="button"
           data-testid="btn-play"
-          disabled={ disable }
-          onClick={ () => this.playFunction() }
+          disabled={disable}
+          onClick={() => this.playFunction()}
         >
           Play
         </button>
