@@ -81,13 +81,13 @@ class Game extends React.Component {
             <section data-testid="answer-options">
               {answers.map((a, i) => (
                 <button
-                  data-testid={a.id}
-                  key={i}
+                  data-testid={ a.id }
+                  key={ i }
                   type="button"
-                  className={colorBorder && answers
+                  className={ colorBorder && answers
                     .some((element) => element.correct_answer === a)
-                    ? 'green' : 'red'}
-                  onClick={() => this.handleClick()}
+                    ? 'green' : 'red' }
+                  onClick={ () => this.handleClick() }
                 >
                   {a.answer}
                 </button>
