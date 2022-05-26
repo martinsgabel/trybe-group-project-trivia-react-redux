@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from '../../components/Header';
 import './Game.css';
-// import Timer from '../../components/Timer';
+import scoreUpdate from '../../actions/scoreUpdate';
+
+const correctId = 'correct-answer';
 
 class Game extends React.Component {
   constructor() {
@@ -15,6 +18,9 @@ class Game extends React.Component {
       question: '',
       colorBorder: false,
       timer: 30,
+      difficulty: '',
+      correct: '',
+      next: false,
     };
   }
 
@@ -37,25 +43,16 @@ class Game extends React.Component {
     }
   }
 
-  handleClick = () => {
-    this.setState({
-      colorBorder: true,
-    });
-    console.log('oi');
-  };
-
   verifyToken = async () => {
     const { history } = this.props;
     const { index } = this.state;
-
     const five = 5;
     const three = 3;
     const half = 0.5;
 
     const savedToken = localStorage.getItem('token');
-    const gameQuestions = await fetch(
-      `https://opentdb.com/api.php?amount=${five}&token=${savedToken}`,
-    );
+    const url = `https://opentdb.com/api.php?amount=${five}&token=${savedToken}`;
+    const gameQuestions = await fetch(url);
     const questionsReturn = await gameQuestions.json();
 
     if (questionsReturn.response_code === three) {
@@ -65,10 +62,12 @@ class Game extends React.Component {
       this.setState({
         questions: questionsReturn,
         category: questionsReturn.results[index].category,
+        difficulty: questionsReturn.results[index].difficulty,
+        correct: questionsReturn.results[index].correct_answer,
         answers: [
           {
             answer: questionsReturn.results[index].correct_answer,
-            id: 'correct-answer',
+            id: correctId,
           },
           ...questionsReturn.results[index].incorrect_answers.map(
             (iAnswer, i) => ({
@@ -89,24 +88,87 @@ class Game extends React.Component {
     return 'red';
   };
 
-  selectAnswer = () => {
-    this.setState({ colorBorder: true });
+  selectAnswer = (event) => {
+    this.setState({ colorBorder: true, next: true });
+    this.ponctuationFunction(event);
+  }
+
+  ponctuationFunction = (event) => {
+    const one = 1;
+    const two = 2;
+    const three = 3;
+    const ten = 10;
+    const { correct, difficulty, timer } = this.state;
+    const { score } = this.props;
+    if (event.target.name === correct) {
+      if (difficulty === 'hard') {
+        const scorePoints = ten + (timer * three);
+        console.log(scorePoints);
+        score(scorePoints);
+      } else if (difficulty === 'medium') {
+        const scorePoints = ten + (timer * two);
+        console.log(scorePoints);
+        score(scorePoints);
+      } else {
+        const scorePoints = ten + (timer * one);
+        console.log(scorePoints);
+        score(scorePoints);
+      }
+    }
+  }
+
+  changeIndex = () => {
+    const four = 4;
+    const { index } = this.state;
+    const { history } = this.props;
+    if (index === four) {
+      history.push('/feedback');
+    } else {
+      this.setState((prevState) => ({ index: prevState.index + 1, colorBorder: false }));
+      this.changeState();
+    }
+  }
+
+  changeState = () => {
+    const { questions } = this.state;
+    const half = 0.5;
+    this.setState((prevState) => ({
+      category: questions.results[prevState.index].category,
+      difficulty: questions.results[prevState.index].difficulty,
+      correct: questions.results[prevState.index].correct_answer,
+      answers: [
+        {
+          answer: questions.results[prevState.index].correct_answer,
+          id: correctId,
+        },
+        ...questions.results[prevState.index].incorrect_answers.map(
+          (iAnswer, i) => ({
+            answer: iAnswer,
+            id: `wrong-answer-${i}`,
+          }),
+        ),
+      ].sort(() => half - Math.random()),
+      question: questions.results[prevState.index].question,
+    }));
   }
 
   render() {
-    const { questions, answers, category, question, colorBorder, timer } = this.state;
+    const { questions,
+      answers, category, question, colorBorder, timer, next } = this.state;
+
     const correctAnswerElement = answers.find(
       (answer) => answer.id === 'correct-answer',
     );
+
     const correctAnswer = () => {
       if (correctAnswerElement !== undefined) {
         return correctAnswerElement.answer;
       }
       return '';
     };
+
     return (
       <article>
-        {/* <Timer /> */}
         <span>
           {timer}
         </span>
@@ -121,12 +183,13 @@ class Game extends React.Component {
               {answers.map((a, i) => (
                 <button
                   data-testid={ a.id }
+                  name={ a.answer }
                   key={ i }
                   type="button"
                   className={
                     colorBorder ? this.border(a.answer, correctAnswer()) : ''
                   }
-                  onClick={ this.selectAnswer }
+                  onClick={ (event) => this.selectAnswer(event) }
                   disabled={ colorBorder }
                 >
                   {a.answer}
@@ -135,23 +198,29 @@ class Game extends React.Component {
             </section>
           </section>
         )}
+        { next && (
+          <button
+            type="button"
+            data-testid="btn-next"
+            onClick={ () => this.changeIndex() }
+          >
+            Next
+          </button>
+        ) }
       </article>
     );
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  score: (state) => dispatch(scoreUpdate(state)),
+});
+
 Game.propTypes = {
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
+  score: propTypes.func.isRequired,
 };
 
-// .sort((a, b) => {
-//   const one = -1;
-//   if (a.answer < b.answer) {
-//     return one;
-//   }
-//   return true;
-// }
-
-export default Game;
+export default connect(null, mapDispatchToProps)(Game);
