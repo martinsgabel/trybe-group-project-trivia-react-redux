@@ -51,9 +51,8 @@ class Game extends React.Component {
     const half = 0.5;
 
     const savedToken = localStorage.getItem('token');
-    const gameQuestions = await fetch(
-      `https://opentdb.com/api.php?amount=${five}&token=${savedToken}`,
-    );
+    const url = `https://opentdb.com/api.php?amount=${five}&token=${savedToken}`;
+    const gameQuestions = await fetch(url);
     const questionsReturn = await gameQuestions.json();
 
     if (questionsReturn.response_code === three) {
