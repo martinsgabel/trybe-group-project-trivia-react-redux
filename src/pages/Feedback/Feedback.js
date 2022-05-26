@@ -27,20 +27,20 @@ class Feedback extends Component {
     return (
       <article>
         <Header />
-        <h1 data-testid="feedback-text">{ feedback }</h1>
-        <h3 data-testid="feedback-total-score">{ score }</h3>
-        <h3 data-testid="feedback-total-question">{ assertions }</h3>
+        <h1 data-testid="feedback-text">{feedback}</h1>
+        <h3 data-testid="feedback-total-score">{score}</h3>
+        <h3 data-testid="feedback-total-question">{assertions}</h3>
         <button
           type="button"
           data-testid="btn-play-again"
-          onClick={ () => history.push('/') }
+          onClick={() => history.push('/')}
         >
           Play Again
         </button>
         <button
           type="button"
           data-testid="btn-ranking"
-          onClick={ () => history.push('/ranking') }
+          onClick={() => history.push('/ranking')}
         >
           Ranking
         </button>
