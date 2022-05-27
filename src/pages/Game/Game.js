@@ -121,9 +121,9 @@ class Game extends React.Component {
   changeIndex = () => {
     const four = 4;
     const { index } = this.state;
-    const { history, score } = this.props;
+    const { history } = this.props;
     if (index === four) {
-      this.saveInRanking(); score(0);
+      this.saveInRanking();
       history.push('/feedback');
     } else {
       this.setState((prevState) => ({ index: prevState.index + 1, colorBorder: false }));

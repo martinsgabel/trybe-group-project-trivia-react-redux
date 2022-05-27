@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from '../../components/Header';
+import scoreUpdate from '../../actions/scoreUpdate';
 
 // Triviers number one no mercado da Trybe.
 
@@ -25,7 +26,7 @@ class Feedback extends Component {
 
   render() {
     const { feedback } = this.state;
-    const { score, assertions, history } = this.props;
+    const { score, assertions, history, scorePoints } = this.props;
     return (
       <article>
         <Header />
@@ -42,7 +43,10 @@ class Feedback extends Component {
         <button
           type="button"
           data-testid="btn-ranking"
-          onClick={ () => history.push('/ranking') }
+          onClick={ () => {
+            scorePoints(0);
+            history.push('/ranking');
+          } }
         >
           Ranking
         </button>
@@ -56,12 +60,17 @@ const mapStateToProps = (state) => ({
   score: state.player.score,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  scorePoints: (state) => dispatch(scoreUpdate(state)),
+});
+
 Feedback.propTypes = {
   assertions: propTypes.number.isRequired,
   score: propTypes.number.isRequired,
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
+  scorePoints: propTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
