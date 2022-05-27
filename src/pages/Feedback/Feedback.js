@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from '../../components/Header';
 
+// Triviers number one no mercado da Trybe.
+
 class Feedback extends Component {
   constructor() {
     super();
