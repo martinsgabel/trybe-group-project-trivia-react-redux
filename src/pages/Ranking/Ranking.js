@@ -2,11 +2,31 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 class Ranking extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      ranking: [],
+    };
+  }
+
+  componentDidMount = () => {
+    this.getRanking();
+  }
+
+  getRanking = () => {
+    const savedRanking = localStorage.getItem('ranking');
+    if (savedRanking !== null) {
+      const parseRanking = JSON.parse(savedRanking);
+      const orderedRanking = parseRanking.sort((a, b) => b.score - a.score);
+      this.setState({ ranking: orderedRanking });
+    }
+  }
+
   render() {
     const { history } = this.props;
+    const { ranking } = this.state;
     return (
       <article>
-        {/* <Header /> */}
         <h1 data-testid="ranking-title">Ranking</h1>
         <button
           type="button"
@@ -15,6 +35,22 @@ class Ranking extends React.Component {
         >
           Logout
         </button>
+        { ranking.length === 0 ? <h1>Não há jogadores aqui</h1> : (
+          <ul>
+            { ranking.map((player, i) => (
+              <li key={ player.name }>
+                <div>
+                  <h1 data-testid={ `player-name-${i}` }>{ player.name }</h1>
+                  <h3 data-testid={ `player-score-${i}` }>{ player.score }</h3>
+                </div>
+                <img
+                  src={ player.picture }
+                  alt={ `${player.name} pic` }
+                />
+              </li>
+            ))}
+          </ul>
+        )}
       </article>
     );
   }

@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
 import Header from '../../components/Header';
 import './Game.css';
 import scoreUpdate from '../../actions/scoreUpdate';
+import saveRanking from '../../functions/localStorage/rankingStorage';
 
 const correctId = 'correct-answer';
-
 class Game extends React.Component {
   constructor() {
     super();
@@ -21,16 +22,23 @@ class Game extends React.Component {
       difficulty: '',
       correct: '',
       next: false,
+      ranking: [],
     };
   }
 
   componentDidMount = () => {
     this.verifyToken();
+    this.getRanking();
     const second = 1000;
     this.timerID = setInterval(
       () => this.tick(), second,
     );
   };
+
+  getRanking = () => {
+    const savedRanking = localStorage.getItem('ranking');
+    if (savedRanking !== null) this.setState({ ranking: JSON.parse(savedRanking) });
+  }
 
   tick = () => {
     const { timer } = this.state;
@@ -46,16 +54,12 @@ class Game extends React.Component {
   verifyToken = async () => {
     const { history } = this.props;
     const { index } = this.state;
-    const five = 5;
-    const three = 3;
-    const half = 0.5;
-
+    const number = { half: 0.5, three: 3, five: 5 };
     const savedToken = localStorage.getItem('token');
-    const url = `https://opentdb.com/api.php?amount=${five}&token=${savedToken}`;
+    const url = `https://opentdb.com/api.php?amount=${number.five}&token=${savedToken}`;
     const gameQuestions = await fetch(url);
     const questionsReturn = await gameQuestions.json();
-
-    if (questionsReturn.response_code === three) {
+    if (questionsReturn.response_code === number.three) {
       localStorage.removeItem('token');
       history.push('/');
     } else {
@@ -75,7 +79,7 @@ class Game extends React.Component {
               id: `wrong-answer-${i}`,
             }),
           ),
-        ].sort(() => half - Math.random()),
+        ].sort(() => number.half - Math.random()),
         question: questionsReturn.results[index].question,
       });
     }
@@ -94,23 +98,20 @@ class Game extends React.Component {
   }
 
   ponctuationFunction = (event) => {
-    const one = 1;
-    const two = 2;
-    const three = 3;
-    const ten = 10;
+    const number = { one: 1, two: 2, three: 3, ten: 10 };
     const { correct, difficulty, timer } = this.state;
     const { score } = this.props;
     if (event.target.name === correct) {
       if (difficulty === 'hard') {
-        const scorePoints = ten + (timer * three);
+        const scorePoints = number.ten + (timer * number.three);
         console.log(scorePoints);
         score(scorePoints);
       } else if (difficulty === 'medium') {
-        const scorePoints = ten + (timer * two);
+        const scorePoints = number.ten + (timer * number.two);
         console.log(scorePoints);
         score(scorePoints);
       } else {
-        const scorePoints = ten + (timer * one);
+        const scorePoints = number.ten + (timer * number.one);
         console.log(scorePoints);
         score(scorePoints);
       }
@@ -122,10 +123,23 @@ class Game extends React.Component {
     const { index } = this.state;
     const { history } = this.props;
     if (index === four) {
+      this.saveInRanking();
       history.push('/feedback');
     } else {
       this.setState((prevState) => ({ index: prevState.index + 1, colorBorder: false }));
       this.changeState();
+    }
+  }
+
+  saveInRanking = () => {
+    const { ranking } = this.state; const { name, scorePoints, email } = this.props;
+    const emailCrypto = md5(email).toString();
+    if (ranking === []) {
+      const newRanking = [{ name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
+      saveRanking(newRanking);
+    } else {
+      const newRanking = [...ranking, { name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
+      saveRanking(newRanking);
     }
   }
 
@@ -216,11 +230,20 @@ const mapDispatchToProps = (dispatch) => ({
   score: (state) => dispatch(scoreUpdate(state)),
 });
 
+const mapStateToProps = (state) => ({
+  name: state.player.name,
+  scorePoints: state.player.score,
+  email: state.player.gravatarEmail,
+});
+
 Game.propTypes = {
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
   score: propTypes.func.isRequired,
+  name: propTypes.string.isRequired,
+  scorePoints: propTypes.number.isRequired,
+  email: propTypes.string.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

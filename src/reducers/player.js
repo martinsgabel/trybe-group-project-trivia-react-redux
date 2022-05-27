@@ -13,7 +13,7 @@ const player = (state = playerState, action) => {
       gravatarEmail: action.payload.email };
   case ('scoreUpdate'):
     return { ...state,
-      score: state.score + action.payload,
+      score: (action.payload === 0 ? action.payload : state.score + action.payload),
       assertions: state.assertions + 1 };
   default:
     return state;
