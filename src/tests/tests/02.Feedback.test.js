@@ -211,8 +211,6 @@ describe('Testa o componente Feedback.', () => {
     userEvent.click(buttonRanking)
     const rankingPath = history.location.pathname
     expect(rankingPath).toBe('/ranking')
-
-
   })
 
 });
