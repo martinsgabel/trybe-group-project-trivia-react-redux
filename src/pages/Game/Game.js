@@ -135,10 +135,6 @@ class Game extends React.Component {
     const { ranking } = this.state; const { name, scorePoints, email } = this.props;
     const emailCrypto = md5(email).toString();
 
-    // const newRanking = { name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` };
-    // newRanking.concat(ranking);
-    // saveRanking(newRanking);
-
     if (ranking === []) {
       const newRanking = [{ name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
       saveRanking(newRanking);
@@ -172,7 +168,7 @@ class Game extends React.Component {
   }
 
   render() {
-    const { questions,
+    const {
       answers, category, question, colorBorder, timer, next } = this.state;
 
     const correctAnswerElement = answers.find(
@@ -184,12 +180,11 @@ class Game extends React.Component {
         return correctAnswerElement.answer;
       }
       return '';
-      return correctAnswerElement.answer;
     };
 
     return (
       <article>
-        <span data-testid="timer" >
+        <span data-testid="timer">
           {timer}
         </span>
         <Header />
@@ -200,15 +195,15 @@ class Game extends React.Component {
           <section data-testid="answer-options">
             {answers.map((a, i) => (
               <button
-                data-testid={a.id}
-                name={a.answer}
-                key={i}
+                data-testid={ a.id }
+                name={ a.answer }
+                key={ i }
                 type="button"
                 className={
                   colorBorder ? this.border(a.answer, correctAnswer()) : ''
                 }
-                onClick={(event) => this.selectAnswer(event)}
-                disabled={colorBorder}
+                onClick={ (event) => this.selectAnswer(event) }
+                disabled={ colorBorder }
               >
                 {a.answer}
               </button>
@@ -220,7 +215,7 @@ class Game extends React.Component {
           <button
             type="button"
             data-testid="btn-next"
-            onClick={() => this.changeIndex()}
+            onClick={ () => this.changeIndex() }
           >
             Next
           </button>
