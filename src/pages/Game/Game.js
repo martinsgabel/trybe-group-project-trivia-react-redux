@@ -134,6 +134,7 @@ class Game extends React.Component {
   saveInRanking = () => {
     const { ranking } = this.state; const { name, scorePoints, email } = this.props;
     const emailCrypto = md5(email).toString();
+
     if (ranking === []) {
       const newRanking = [{ name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
       saveRanking(newRanking);
@@ -167,7 +168,7 @@ class Game extends React.Component {
   }
 
   render() {
-    const { questions,
+    const {
       answers, category, question, colorBorder, timer, next } = this.state;
 
     const correctAnswerElement = answers.find(
@@ -183,36 +184,34 @@ class Game extends React.Component {
 
     return (
       <article>
-        <span>
+        <span data-testid="timer">
           {timer}
         </span>
         <Header />
-        {questions === {} ? (
-          <h1>Loading</h1>
-        ) : (
-          <section>
-            <h1 data-testid="question-category">{category}</h1>
-            <h3 data-testid="question-text">{question}</h3>
-            <section data-testid="answer-options">
-              {answers.map((a, i) => (
-                <button
-                  data-testid={ a.id }
-                  name={ a.answer }
-                  key={ i }
-                  type="button"
-                  className={
-                    colorBorder ? this.border(a.answer, correctAnswer()) : ''
-                  }
-                  onClick={ (event) => this.selectAnswer(event) }
-                  disabled={ colorBorder }
-                >
-                  {a.answer}
-                </button>
-              ))}
-            </section>
+
+        <section>
+          <h1 data-testid="question-category">{category}</h1>
+          <h3 data-testid="question-text">{question}</h3>
+          <section data-testid="answer-options">
+            {answers.map((a, i) => (
+              <button
+                data-testid={ a.id }
+                name={ a.answer }
+                key={ i }
+                type="button"
+                className={
+                  colorBorder ? this.border(a.answer, correctAnswer()) : ''
+                }
+                onClick={ (event) => this.selectAnswer(event) }
+                disabled={ colorBorder }
+              >
+                {a.answer}
+              </button>
+            ))}
           </section>
-        )}
-        { next && (
+        </section>
+
+        {next && (
           <button
             type="button"
             data-testid="btn-next"
@@ -220,7 +219,7 @@ class Game extends React.Component {
           >
             Next
           </button>
-        ) }
+        )}
       </article>
     );
   }
