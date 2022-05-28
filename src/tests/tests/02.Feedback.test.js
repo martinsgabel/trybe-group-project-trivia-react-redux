@@ -189,9 +189,12 @@ describe('Testa o componente Feedback.', () => {
 
     const gamePath = history.location.pathname
     expect(gamePath).toBe('/game')
- 
+    //------
+    // const correctAnswer = screen.findByTestId('correct-answer')
+    // expect(await correctAnswer).toBeInTheDocument();
     const buttons = await screen.findAllByRole('button');
 
+    // fireEvent(buttons[1])
     userEvent.click(buttons[1]);
     const nextButton = screen.getByTestId('btn-next')
     userEvent.click(nextButton);
@@ -208,47 +211,8 @@ describe('Testa o componente Feedback.', () => {
     userEvent.click(buttonRanking)
     const rankingPath = history.location.pathname
     expect(rankingPath).toBe('/ranking')
-  })
-
-  test('Testa o botão Play Again da página de Feedback', async () => {
-    const { history } = renderWithRouterAndRedux(<App />);
 
 
-    const typeName = 'triviers';
-    const typeEmail = 'triviers@triviers.com'
-
-    const inputName = screen.getByRole('textbox', { name: 'Name' });
-    userEvent.type(inputName, typeName);
-
-    const inputEmail = screen.getByRole('textbox', { name: 'E-mail' });
-    userEvent.type(inputEmail, typeEmail);
-
-    const buttonPlay = screen.getByRole('button', { name: 'Play' })
-    userEvent.click(buttonPlay);
-    expect(await screen.findByText('triviers')).toBeInTheDocument();
-    console.log(history);
-
-    const gamePath = history.location.pathname
-    expect(gamePath).toBe('/game')
- 
-    const buttons = await screen.findAllByRole('button');
-
-    userEvent.click(buttons[1]);
-    const nextButton = screen.getByTestId('btn-next')
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    const feedbackPath = history.location.pathname
-
-    expect(feedbackPath).toBe('/feedback')
-
-    const buttonPlayAgain = screen.getByText('Play Again')
-
-    userEvent.click(buttonPlayAgain)
-    const homePath = history.location.pathname
-    expect(homePath).toBe('/')
   })
 
 });
