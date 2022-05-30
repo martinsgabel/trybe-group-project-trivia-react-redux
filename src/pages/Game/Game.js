@@ -174,7 +174,7 @@ class Game extends React.Component {
 
     return (
       <article>
-        <span>
+        <span data-testid="timer">
           {timer}
         </span>
         <Header />
@@ -207,7 +207,7 @@ class Game extends React.Component {
           >
             Next
           </button>
-        ) }
+        )}
       </article>
     );
   }

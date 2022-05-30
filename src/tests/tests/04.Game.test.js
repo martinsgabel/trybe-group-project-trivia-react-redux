@@ -29,7 +29,7 @@ describe('Testa o componente game', () => {
     expect(gamePath).toBe('/game')
 
     expect(await screen.findByTestId('question-category'));
-    expect(await screen.findByRole('heading', { level: 1}))
+    expect(await screen.findByRole('heading', { level: 1 }))
   })
 
   test('Testa se a pergunta está sendo exibida', async () => {
@@ -52,7 +52,7 @@ describe('Testa o componente game', () => {
     expect(gamePath).toBe('/game')
 
     expect(await screen.findByTestId('question-text'));
-    expect(await screen.findByRole('heading', { level: 3}))
+    expect(await screen.findByRole('heading', { level: 3 }))
   })
 
   test('Testa se a imagem gravatar está sendo exibida', async () => {
@@ -120,7 +120,7 @@ describe('Testa o componente game', () => {
 
     expect(await screen.findByTestId('header-player-name'));
   })
-  
+
   test('Verifica se aparecem 4 botões', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
 
@@ -650,4 +650,6 @@ describe('Testa o componente game', () => {
     const location = history.location.pathname
     expect(location).toBe('/');
   })
+
+
 })
