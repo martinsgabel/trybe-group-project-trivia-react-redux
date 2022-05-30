@@ -1,7 +1,6 @@
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-// import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import Feedback from "../../pages/Feedback/Feedback";
 import renderWithRouterAndRedux from '../helpers/renderWithRouterAndRedux'
 import App from '../../App'
@@ -69,9 +68,7 @@ describe('Testa o componente Feedback.', () => {
 
     const gamePath = history.location.pathname
     expect(gamePath).toBe('/game')
-    //------
-    // const correctAnswer = screen.findByTestId('correct-answer')
-    // expect(await correctAnswer).toBeInTheDocument();
+ 
     const buttons = await screen.findAllByRole('button');
 
     // fireEvent(buttons[1])
@@ -182,6 +179,37 @@ describe('Testa o componente Feedback.', () => {
     const inputEmail = screen.getByRole('textbox', { name: 'E-mail' });
     userEvent.type(inputEmail, typeEmail);
 
+    const buttonPlay2 = screen.getByRole('button', { name: 'Play' })
+    userEvent.click(buttonPlay2);
+    expect(await screen.findByText('triviers')).toBeInTheDocument();
+    console.log(history);
+
+    const gamePath2 = history.location.pathname
+    expect(gamePath2).toBe('/game')
+    //------
+    // const correctAnswer = screen.findByTestId('correct-answer')
+    // expect(await correctAnswer).toBeInTheDocument();
+    const buttons2 = await screen.findAllByRole('button');
+
+    // fireEvent(buttons[1])
+    userEvent.click(buttons2[1]);
+    const nextButton2 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton2);
+    userEvent.click(nextButton2);
+    userEvent.click(nextButton2);
+    userEvent.click(nextButton2);
+    userEvent.click(nextButton2);
+    const feedbackPath2 = history.location.pathname
+
+    expect(feedbackPath2).toBe('/feedback')
+
+    const buttonRanking = screen.getByText('Ranking')
+
+    userEvent.click(buttonRanking)
+    const rankingPath = history.location.pathname
+    expect(rankingPath).toBe('/ranking')
+
+
     const buttonPlay = screen.getByRole('button', { name: 'Play' })
     userEvent.click(buttonPlay);
     expect(await screen.findByText('triviers')).toBeInTheDocument();
@@ -189,12 +217,9 @@ describe('Testa o componente Feedback.', () => {
 
     const gamePath = history.location.pathname
     expect(gamePath).toBe('/game')
-    //------
-    // const correctAnswer = screen.findByTestId('correct-answer')
-    // expect(await correctAnswer).toBeInTheDocument();
+ 
     const buttons = await screen.findAllByRole('button');
 
-    // fireEvent(buttons[1])
     userEvent.click(buttons[1]);
     const nextButton = screen.getByTestId('btn-next')
     userEvent.click(nextButton);
@@ -205,14 +230,6 @@ describe('Testa o componente Feedback.', () => {
     const feedbackPath = history.location.pathname
 
     expect(feedbackPath).toBe('/feedback')
-
-    const buttonRanking = screen.getByText('Ranking')
-
-    userEvent.click(buttonRanking)
-    const rankingPath = history.location.pathname
-    expect(rankingPath).toBe('/ranking')
-
-
   })
 
 });
