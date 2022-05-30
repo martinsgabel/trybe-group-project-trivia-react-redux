@@ -69,9 +69,7 @@ describe('Testa o componente Feedback.', () => {
 
     const gamePath = history.location.pathname
     expect(gamePath).toBe('/game')
-    //------
-    // const correctAnswer = screen.findByTestId('correct-answer')
-    // expect(await correctAnswer).toBeInTheDocument();
+ 
     const buttons = await screen.findAllByRole('button');
 
     // fireEvent(buttons[1])
@@ -243,12 +241,6 @@ describe('Testa o componente Feedback.', () => {
     const feedbackPath = history.location.pathname
 
     expect(feedbackPath).toBe('/feedback')
-
-    const buttonPlayAgain = screen.getByText('Play Again')
-
-    userEvent.click(buttonPlayAgain)
-    const homePath = history.location.pathname
-    expect(homePath).toBe('/')
   })
 
 });

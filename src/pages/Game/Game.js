@@ -26,8 +26,8 @@ class Game extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    this.verifyToken();
+  componentDidMount = async () => {
+    await this.verifyToken();
     this.getRanking();
     const second = 1000;
     this.timerID = setInterval(
@@ -59,6 +59,7 @@ class Game extends React.Component {
     const url = `https://opentdb.com/api.php?amount=${number.five}&token=${savedToken}`;
     const gameQuestions = await fetch(url);
     const questionsReturn = await gameQuestions.json();
+
     if (questionsReturn.response_code === number.three) {
       localStorage.removeItem('token');
       history.push('/');
@@ -104,15 +105,12 @@ class Game extends React.Component {
     if (event.target.name === correct) {
       if (difficulty === 'hard') {
         const scorePoints = number.ten + (timer * number.three);
-        console.log(scorePoints);
         score(scorePoints);
       } else if (difficulty === 'medium') {
         const scorePoints = number.ten + (timer * number.two);
-        console.log(scorePoints);
         score(scorePoints);
       } else {
         const scorePoints = number.ten + (timer * number.one);
-        console.log(scorePoints);
         score(scorePoints);
       }
     }
@@ -120,26 +118,21 @@ class Game extends React.Component {
 
   changeIndex = () => {
     const four = 4;
-    const { index } = this.state;
-    const { history } = this.props;
+    const { index, ranking } = this.state;
+    const { history, name, scorePoints, email } = this.props;
+    const emailCrypto = md5(email).toString();
     if (index === four) {
-      this.saveInRanking();
+      if (ranking.length === 0) {
+        const newRanking = [{ name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
+        saveRanking(newRanking);
+      } else {
+        const newRanking = [...ranking, { name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
+        saveRanking(newRanking);
+      }
       history.push('/feedback');
     } else {
       this.setState((prevState) => ({ index: prevState.index + 1, colorBorder: false }));
       this.changeState();
-    }
-  }
-
-  saveInRanking = () => {
-    const { ranking } = this.state; const { name, scorePoints, email } = this.props;
-    const emailCrypto = md5(email).toString();
-    if (ranking === []) {
-      const newRanking = [{ name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
-      saveRanking(newRanking);
-    } else {
-      const newRanking = [...ranking, { name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
-      saveRanking(newRanking);
     }
   }
 
@@ -167,8 +160,7 @@ class Game extends React.Component {
   }
 
   render() {
-    const { questions,
-      answers, category, question, colorBorder, timer, next } = this.state;
+    const { answers, category, question, colorBorder, timer, next } = this.state;
 
     const correctAnswerElement = answers.find(
       (answer) => answer.id === 'correct-answer',
@@ -178,7 +170,6 @@ class Game extends React.Component {
       if (correctAnswerElement !== undefined) {
         return correctAnswerElement.answer;
       }
-      return '';
     };
 
     return (
@@ -187,31 +178,27 @@ class Game extends React.Component {
           {timer}
         </span>
         <Header />
-        {questions === {} ? (
-          <h1>Loading</h1>
-        ) : (
-          <section>
-            <h1 data-testid="question-category">{category}</h1>
-            <h3 data-testid="question-text">{question}</h3>
-            <section data-testid="answer-options">
-              {answers.map((a, i) => (
-                <button
-                  data-testid={ a.id }
-                  name={ a.answer }
-                  key={ i }
-                  type="button"
-                  className={
-                    colorBorder ? this.border(a.answer, correctAnswer()) : ''
-                  }
-                  onClick={ (event) => this.selectAnswer(event) }
-                  disabled={ colorBorder }
-                >
-                  {a.answer}
-                </button>
-              ))}
-            </section>
+        <section>
+          <h1 data-testid="question-category">{category}</h1>
+          <h3 data-testid="question-text">{question}</h3>
+          <section data-testid="answer-options">
+            {answers.map((a, i) => (
+              <button
+                data-testid={ a.id }
+                name={ a.answer }
+                key={ i }
+                type="button"
+                className={
+                  colorBorder ? this.border(a.answer, correctAnswer()) : ''
+                }
+                onClick={ (event) => this.selectAnswer(event) }
+                disabled={ colorBorder }
+              >
+                {a.answer}
+              </button>
+            ))}
           </section>
-        )}
+        </section>
         { next && (
           <button
             type="button"
