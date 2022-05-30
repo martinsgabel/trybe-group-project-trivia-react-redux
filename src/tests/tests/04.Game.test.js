@@ -146,7 +146,6 @@ describe('Testa o componente game', () => {
 
   test('Testa o salvamento de multiplos jogadores no ranking', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
-
     const typeName = 'triviers';
     const typeEmail = 'triviers@triviers.com'
 
