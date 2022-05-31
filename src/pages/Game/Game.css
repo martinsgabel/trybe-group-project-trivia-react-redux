@@ -1,11 +1,74 @@
 .red {
   border: 3px solid red;
+  opacity: 50%;
 }
 
 .green {
   border: 3px solid rgb(6, 240, 15);
 }
 
-.game-article {
-  color: white;
+.game-section {
+  margin-top: 10%;
+}
+
+.timerGreen {
+  color:  #2cb67d;
+  font-family: 'Roboto', sans-serif;
+  font-size: xx-large;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.timerRed {
+  color: red;
+  font-family: 'Roboto', sans-serif;
+  font-size: xx-large;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.timerYellow {
+  color: yellow;
+  font-family: 'Roboto', sans-serif;
+  font-size: xx-large;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.game-section h1 {
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-size: xx-large;
+  color: #2cb67d;
+}
+
+.game-section h3 {
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-size: xx-large;
+  color: #2cb67d;
+}
+
+.game-article button {
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: x-large;
+  margin: 5px;
+  padding: 10px;
+  background-color: #2cb67d;
+  color: black;
+  border-radius: 3px;
+}
+
+.game-article button:disabled {
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: x-large;
+  margin: 5px;
+  padding: 10px;
+  background-color: #2cb67d;
+  color: black;
+  border-radius: 3px;
 }

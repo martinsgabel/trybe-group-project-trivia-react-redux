@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from '../../components/Header';
 import scoreUpdate from '../../actions/scoreUpdate';
+import './Feedback.css';
 
 // Triviers number one no mercado da Trybe.
 
@@ -28,11 +29,19 @@ class Feedback extends Component {
     const { feedback } = this.state;
     const { score, assertions, history, scorePoints } = this.props;
     return (
-      <article>
+      <article className="feedback-article">
         <Header />
         <h1 data-testid="feedback-text">{feedback}</h1>
-        <h3 data-testid="feedback-total-score">{score}</h3>
-        <h3 data-testid="feedback-total-question">{assertions}</h3>
+        <h3 data-testid="feedback-total-score">
+          {score}
+          {' '}
+          points!
+        </h3>
+        <h3 data-testid="feedback-total-question">
+          {assertions}
+          {' '}
+          assertions!
+        </h3>
         <button
           type="button"
           data-testid="btn-play-again"

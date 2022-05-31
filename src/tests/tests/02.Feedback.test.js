@@ -22,8 +22,6 @@ describe('Testa o componente Feedback.', () => {
 
     const userName = screen.getByText('Danilo');
     expect(userName).toBeInTheDocument();
-
-
   })
 
   test('2 - Verifica se tem 2 botões na tela', () => {
@@ -119,15 +117,26 @@ describe('Testa o componente Feedback.', () => {
     const gamePath = history.location.pathname
     expect(gamePath).toBe('/game')
  
-    const buttons = await screen.findAllByRole('button');
-
-    userEvent.click(buttons[1]);
+    const button = await screen.findByTestId('correct-answer');
+    userEvent.click(button);
     const nextButton = screen.getByTestId('btn-next')
     userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
+    const button2 = await screen.findByTestId('correct-answer');
+    userEvent.click(button2);
+    const nextButton2 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton2);
+    const button3 = await screen.findByTestId('correct-answer');
+    userEvent.click(button3);
+    const nextButton3 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton3);
+    const button4 = await screen.findByTestId('correct-answer');
+    userEvent.click(button4);
+    const nextButton4 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton4);
+    const button5 = await screen.findByTestId('correct-answer');
+    userEvent.click(button5);
+    const nextButton5 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton5);
     const feedbackPath = history.location.pathname
 
     expect(feedbackPath).toBe('/feedback')
@@ -152,8 +161,8 @@ describe('Testa o componente Feedback.', () => {
     renderWithRouterAndRedux(<Feedback />, initialState);
 
     const urlImage = '//www.gravatar.com/avatar/38adfb27e0081b8440ea833e29afc8a3'
-    const imageGravatar = screen.getByRole('img', { src: urlImage });
-    expect(imageGravatar).toBeInTheDocument();
+    const imageGravatar = screen.getAllByRole('img', { src: urlImage });
+    expect(imageGravatar[0]).toBeInTheDocument();
   })
 
   test('7 - Verifica se a frase "Could be better" é mostrada quando a pessoa acerta menos de 3 perguntas', async () => {
@@ -205,10 +214,10 @@ describe('Testa o componente Feedback.', () => {
     }
     renderWithRouterAndRedux(<Feedback />, initialState);
 
-    const numberScore = '23'
-    const score = screen.getAllByText(numberScore)
+    const numberScore = '23 points!'
+    const score = screen.getByText(numberScore)
 
-    expect(score).toHaveLength(2);
+    expect(score).toBeInTheDocument();
   })
 
   test('10 - Verifica se o botão "Ranking" redireciona para Ranking ao ser clicado', async () => {
@@ -283,15 +292,27 @@ describe('Testa o componente Feedback.', () => {
     const gamePath2 = history.location.pathname
     expect(gamePath2).toBe('/game')
 
-    const buttons2 = await screen.findAllByRole('button');
-
-    userEvent.click(buttons2[1]);
+    const button = await screen.findByTestId('correct-answer');
+    userEvent.click(button);
+    const nextButton = screen.getByTestId('btn-next')
+    userEvent.click(nextButton);
+    const button2 = await screen.findByTestId('correct-answer');
+    userEvent.click(button2);
     const nextButton2 = screen.getByTestId('btn-next')
     userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
+    const button3 = await screen.findByTestId('correct-answer');
+    userEvent.click(button3);
+    const nextButton3 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton3);
+    const button4 = await screen.findByTestId('correct-answer');
+    userEvent.click(button4);
+    const nextButton4 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton4);
+    const button5 = await screen.findByTestId('correct-answer');
+    userEvent.click(button5);
+    const nextButton5 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton5);
+
     const feedbackPath2 = history.location.pathname
 
     expect(feedbackPath2).toBe('/feedback')

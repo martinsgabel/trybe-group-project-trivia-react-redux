@@ -47,7 +47,7 @@ class Game extends React.Component {
         timer: prevState.timer - 1,
       }));
     } else {
-      this.setState({ colorBorder: true });
+      this.setState({ colorBorder: true, next: true });
     }
   }
 
@@ -131,7 +131,10 @@ class Game extends React.Component {
       }
       history.push('/feedback');
     } else {
-      this.setState((prevState) => ({ index: prevState.index + 1, colorBorder: false }));
+      this.setState((prevState) => ({ index: prevState.index + 1,
+        colorBorder: false,
+        timer: 30,
+        next: false }));
       this.changeState();
     }
   }
@@ -159,6 +162,13 @@ class Game extends React.Component {
     }));
   }
 
+  changeColor = (timer) => {
+    const n = { five: 5, ten: 10 };
+    if (timer <= n.five) return 'timerRed';
+    if (timer <= n.ten) return 'timerYellow';
+    return 'timerGreen';
+  }
+
   render() {
     const { answers, category, question, colorBorder, timer, next } = this.state;
 
@@ -175,39 +185,41 @@ class Game extends React.Component {
     return (
       <article className="game-article">
         <Header />
-        <span data-testid="timer">
-          {timer}
-        </span>
-        <section>
-          <h1 data-testid="question-category">{category}</h1>
-          <h3 data-testid="question-text">{question}</h3>
-          <section data-testid="answer-options">
-            {answers.map((a, i) => (
-              <button
-                data-testid={ a.id }
-                name={ a.answer }
-                key={ i }
-                type="button"
-                className={
-                  colorBorder ? this.border(a.answer, correctAnswer()) : ''
-                }
-                onClick={ (event) => this.selectAnswer(event) }
-                disabled={ colorBorder }
-              >
-                {a.answer}
-              </button>
-            ))}
+        <section className="game-section">
+          <span data-testid="timer" className={ this.changeColor(timer) }>
+            {timer}
+          </span>
+          <section>
+            <h1 data-testid="question-category">{category}</h1>
+            <h3 data-testid="question-text">{question}</h3>
+            <section data-testid="answer-options">
+              {answers.map((a, i) => (
+                <button
+                  data-testid={ a.id }
+                  name={ a.answer }
+                  key={ i }
+                  type="button"
+                  className={
+                    colorBorder ? this.border(a.answer, correctAnswer()) : ''
+                  }
+                  onClick={ (event) => this.selectAnswer(event) }
+                  disabled={ colorBorder }
+                >
+                  {a.answer}
+                </button>
+              ))}
+            </section>
           </section>
+          { next && (
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={ () => this.changeIndex() }
+            >
+              Next
+            </button>
+          )}
         </section>
-        { next && (
-          <button
-            type="button"
-            data-testid="btn-next"
-            onClick={ () => this.changeIndex() }
-          >
-            Next
-          </button>
-        )}
       </article>
     );
   }

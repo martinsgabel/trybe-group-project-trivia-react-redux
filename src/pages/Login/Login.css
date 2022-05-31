@@ -52,11 +52,12 @@ form input {
   font-family: 'Roboto', sans-serif;
   font-style: italic;
   font-size: x-large;
+  font-weight: bold;
   margin: 5px;
   padding: 10px;
   border: none;
   background-color: #2cb67d;
-  color: #fffffe;
+  color: black;
   border-radius: 3px;
 }
 

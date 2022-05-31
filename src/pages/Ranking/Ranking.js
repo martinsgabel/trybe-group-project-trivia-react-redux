@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import './Ranking.css';
 
 class Ranking extends React.Component {
   constructor() {
@@ -26,21 +27,28 @@ class Ranking extends React.Component {
     const { history } = this.props;
     const { ranking } = this.state;
     return (
-      <article>
-        <h1 data-testid="ranking-title">Ranking</h1>
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ () => history.push('/') }
-        >
-          Logout
-        </button>
+      <article className="ranking-article">
+        <section className="heading-section">
+          <h1 className="heading" data-testid="ranking-title">Ranking</h1>
+          <button
+            type="button"
+            data-testid="btn-go-home"
+            onClick={ () => history.push('/') }
+          >
+            Logout
+          </button>
+        </section>
         { ranking.length === 0 ? <h1>Não há jogadores aqui</h1> : (
           <ul>
             { ranking.map((player, i) => (
               <li key={ player.name }>
                 <div>
-                  <h1 data-testid={ `player-name-${i}` }>{ player.name }</h1>
+                  <h1
+                    className="player-name-ranking"
+                    data-testid={ `player-name-${i}` }
+                  >
+                    { player.name }
+                  </h1>
                   <h3 data-testid={ `player-score-${i}` }>{ player.score }</h3>
                 </div>
                 <img

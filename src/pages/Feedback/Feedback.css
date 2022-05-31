@@ -1,0 +1,26 @@
+.feedback-article h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 100px;
+  font-style: italic;
+  color: #2cb67d;
+}
+
+.feedback-article h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 50px;
+  font-style: italic;
+  color: #2cb67d;
+}
+
+.feedback-article button {
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-size: x-large;
+  font-weight: bold;
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: #2cb67d;
+  color: black;
+  border-radius: 3px;
+}

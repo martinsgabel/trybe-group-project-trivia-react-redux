@@ -536,15 +536,26 @@ describe('Testa o componente game', () => {
     expect(await screen.findAllByRole('button')).not.toHaveLength(0)
     expect(await screen.findAllByRole('button')).not.toHaveLength(1)
 
-    const buttons = await screen.findAllByRole('button');
-
-    userEvent.click(buttons[1]);
+    const button = await screen.findByTestId('correct-answer');
+    userEvent.click(button);
     const nextButton = screen.getByTestId('btn-next')
     userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
+    const button2 = await screen.findByTestId('correct-answer');
+    userEvent.click(button2);
+    const nextButton2 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton2);
+    const button3 = await screen.findByTestId('correct-answer');
+    userEvent.click(button3);
+    const nextButton3 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton3);
+    const button4 = await screen.findByTestId('correct-answer');
+    userEvent.click(button4);
+    const nextButton4 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton4);
+    const button5 = await screen.findByTestId('correct-answer');
+    userEvent.click(button5);
+    const nextButton5 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton5);
 
     const buttonRanking = screen.getByText('Ranking')
 
@@ -578,15 +589,26 @@ describe('Testa o componente game', () => {
     expect(await screen.findAllByRole('button')).not.toHaveLength(0)
     expect(await screen.findAllByRole('button')).not.toHaveLength(1)
 
-    const buttons2 = await screen.findAllByRole('button');
-
-    userEvent.click(buttons2[1]);
-    const nextButton2 = screen.getByTestId('btn-next')
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
+    const button6 = await screen.findByTestId('correct-answer');
+    userEvent.click(button6);
+    const nextButton6 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton6);
+    const button7 = await screen.findByTestId('correct-answer');
+    userEvent.click(button7);
+    const nextButton8 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton8);
+    const button9 = await screen.findByTestId('correct-answer');
+    userEvent.click(button9);
+    const nextButton10 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton10);
+    const button11 = await screen.findByTestId('correct-answer');
+    userEvent.click(button11);
+    const nextButton12 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton12);
+    const button13 = await screen.findByTestId('correct-answer');
+    userEvent.click(button13);
+    const nextButton14 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton14);
 
     const feedbackPath2 = history.location.pathname
     expect(feedbackPath2).toBe('/feedback')
@@ -679,7 +701,7 @@ describe('Testa o componente game', () => {
     expect(gamePath2).toBe('/game')
 
     expect(screen.getByText('30')).toBeInTheDocument();
-    expect(screen.getByText('0')).toBeInTheDocument();
+    expect(screen.getByText('0 pts')).toBeInTheDocument();
   })
 
   test('Testa o salvamento do ranking após escolhas corretas e erradas', async () => {
@@ -770,13 +792,20 @@ describe('Testa o componente game', () => {
     userEvent.click(wrongAnswer1);
     userEvent.click(nextButton2);
 
-    const correct = await screen.findByTestId('correct-answer')
-    userEvent.click(correct);
-    userEvent.click(nextButton2);
-    userEvent.click(correct);
-    userEvent.click(nextButton2);
-    userEvent.click(correct);
-    userEvent.click(nextButton2);
+    const nextButton3 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton3);
+    const button4 = await screen.findByTestId('correct-answer');
+    userEvent.click(button4);
+    const nextButton4 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton4);
+    const button5 = await screen.findByTestId('correct-answer');
+    userEvent.click(button5);
+    const nextButton5 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton5);
+    const button6 = await screen.findByTestId('wrong-answer-1');
+    userEvent.click(button6);
+    const nextButton6 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton6);
 
     const feedbackPath2 = history.location.pathname
     expect(feedbackPath2).toBe('/feedback')
@@ -862,27 +891,26 @@ describe('Testa o componente game', () => {
     expect(await screen.findAllByRole('button')).not.toHaveLength(0)
     expect(await screen.findAllByRole('button')).not.toHaveLength(1)
 
-    const correct = await screen.findByTestId('correct-answer')
-    userEvent.click(correct);
-
+    const button = await screen.findByTestId('correct-answer');
+    userEvent.click(button);
+    const nextButton = screen.getByTestId('btn-next')
+    userEvent.click(nextButton);
+    const button2 = await screen.findByTestId('correct-answer');
+    userEvent.click(button2);
     const nextButton2 = screen.getByTestId('btn-next')
     userEvent.click(nextButton2);
-
-    const correct2 = await screen.findByTestId('correct-answer')
-    userEvent.click(correct2);
-    userEvent.click(nextButton2);
-
-    const correct3 = await screen.findByTestId('correct-answer')
-    userEvent.click(correct3);
-    userEvent.click(nextButton2);
-
-    const correct4 = await screen.findByTestId('correct-answer')
-    userEvent.click(correct4);
-    userEvent.click(nextButton2);
-
-    const correct5 = await screen.findByTestId('correct-answer')
-    userEvent.click(correct5);
-    userEvent.click(nextButton2);
+    const button3 = await screen.findByTestId('correct-answer');
+    userEvent.click(button3);
+    const nextButton3 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton3);
+    const button4 = await screen.findByTestId('correct-answer');
+    userEvent.click(button4);
+    const nextButton4 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton4);
+    const button5 = await screen.findByTestId('correct-answer');
+    userEvent.click(button5);
+    const nextButton5 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton5);
 
     const feedbackPath2 = history.location.pathname
     expect(feedbackPath2).toBe('/feedback')
@@ -1083,15 +1111,26 @@ describe('Testa o componente game', () => {
     const buttonPlay2 = screen.getByRole('button', { name: 'Play' })
     userEvent.click(buttonPlay2);
 
-    const wrongAnswer = await screen.findByTestId('wrong-answer-0');
-    userEvent.click(wrongAnswer);
-
-    const nextButton2 = await screen.findByTestId('btn-next')
+    const button = await screen.findByTestId('correct-answer');
+    userEvent.click(button);
+    const nextButton = screen.getByTestId('btn-next')
+    userEvent.click(nextButton);
+    const button2 = await screen.findByTestId('correct-answer');
+    userEvent.click(button2);
+    const nextButton2 = screen.getByTestId('btn-next')
     userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
-    userEvent.click(nextButton2);
+    const button3 = await screen.findByTestId('correct-answer');
+    userEvent.click(button3);
+    const nextButton3 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton3);
+    const button4 = await screen.findByTestId('correct-answer');
+    userEvent.click(button4);
+    const nextButton4 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton4);
+    const button5 = await screen.findByTestId('correct-answer');
+    userEvent.click(button5);
+    const nextButton5 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton5);
 
     const feedbackPath2 = history.location.pathname
     expect(feedbackPath2).toBe('/feedback')
@@ -1246,21 +1285,26 @@ describe('Testa o componente game', () => {
       saveRanking(ranking);
     })
 
-    const wrongAnswer = await screen.findByTestId('wrong-answer-0');
-    userEvent.click(wrongAnswer);
+    const button = await screen.findByTestId('correct-answer');
+    userEvent.click(button);
+    const nextButton = screen.getByTestId('btn-next')
+    userEvent.click(nextButton);
+    const button2 = await screen.findByTestId('correct-answer');
+    userEvent.click(button2);
     const nextButton2 = screen.getByTestId('btn-next')
     userEvent.click(nextButton2);
-
-    userEvent.click(wrongAnswer);
-    userEvent.click(nextButton2);
-
-    const correct = await screen.findByTestId('correct-answer')
-    userEvent.click(correct);
-    userEvent.click(nextButton2);
-    userEvent.click(correct);
-    userEvent.click(nextButton2);
-    userEvent.click(correct);
-    userEvent.click(nextButton2);
+    const button3 = await screen.findByTestId('correct-answer');
+    userEvent.click(button3);
+    const nextButton3 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton3);
+    const button4 = await screen.findByTestId('correct-answer');
+    userEvent.click(button4);
+    const nextButton4 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton4);
+    const button5 = await screen.findByTestId('correct-answer');
+    userEvent.click(button5);
+    const nextButton5 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton5);
 
     expect(Game.changeIndex).not.toHaveBeenCalled();
   })
