@@ -78,6 +78,59 @@ describe('Testa o componente Login.', () => {
   })
 
   test('8 - Verifica se o botão "play" redireciona para Game ao ser clicado', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
     renderWithRouterAndRedux(<App />)
     
     const typeName = 'triviers';

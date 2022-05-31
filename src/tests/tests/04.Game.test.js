@@ -10,6 +10,59 @@ import * as getToken from '../../functions/api/getToken';
 
 describe('Testa o componente game', () => {
   test('Testa se a categoria está sendo exibida', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName = 'triviers';
@@ -33,6 +86,59 @@ describe('Testa o componente game', () => {
   })
 
   test('Testa se a pergunta está sendo exibida', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName = 'triviers';
@@ -56,6 +162,59 @@ describe('Testa o componente game', () => {
   })
 
   test('Testa se a imagem gravatar está sendo exibida', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName = 'triviers';
@@ -78,6 +237,59 @@ describe('Testa o componente game', () => {
   })
 
   test('Testa se o score está sendo exibido', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName = 'triviers';
@@ -100,6 +312,59 @@ describe('Testa o componente game', () => {
   })
 
   test('Testa se o nome do jogador está sendo exibido', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName = 'triviers';
@@ -122,6 +387,59 @@ describe('Testa o componente game', () => {
   })
 
   test('Verifica se aparecem 4 botões', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName = 'triviers';
@@ -145,6 +463,59 @@ describe('Testa o componente game', () => {
   })
 
   test('Testa o salvamento de multiplos jogadores no ranking', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
     const { history } = renderWithRouterAndRedux(<App />);
     const typeName = 'triviers';
     const typeEmail = 'triviers@triviers.com'
@@ -234,6 +605,60 @@ describe('Testa o componente game', () => {
   })
 
   test('Checa o timer e o score', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+
+    
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName2 = 'danilo';
@@ -258,6 +683,59 @@ describe('Testa o componente game', () => {
   })
 
   test('Testa o salvamento do ranking após escolhas corretas e erradas', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName2 = 'danilo';
@@ -303,7 +781,115 @@ describe('Testa o componente game', () => {
     const feedbackPath2 = history.location.pathname
     expect(feedbackPath2).toBe('/feedback')
 
-    expect(await screen.findByText('Could be better...')).toBeInTheDocument();
+    await waitFor( async () => {
+      expect(await screen.findByText('Could be better...')).toBeInTheDocument();
+    }, { timeout: 3999})
+  })
+
+  test('Testa o salvamento do ranking após escolhas corretas', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "hard",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
+    const { history } = renderWithRouterAndRedux(<App />);
+
+    const typeName2 = 'danilo';
+    const typeEmail2 = 'dansdeiro@gmail.com'
+
+    const inputName2 = screen.getByRole('textbox', { name: 'Name' });
+    userEvent.type(inputName2, typeName2);
+
+    const inputEmail2 = screen.getByRole('textbox', { name: 'E-mail' });
+    userEvent.type(inputEmail2, typeEmail2);
+
+    const buttonPlay2 = screen.getByRole('button', { name: 'Play' })
+    userEvent.click(buttonPlay2);
+    
+    expect(await screen.findByText('danilo')).toBeInTheDocument();
+
+    const gamePath2 = history.location.pathname
+    expect(gamePath2).toBe('/game')
+
+    expect(await screen.findAllByRole('button')).not.toHaveLength(0)
+    expect(await screen.findAllByRole('button')).not.toHaveLength(1)
+
+    const correct = await screen.findByTestId('correct-answer')
+    userEvent.click(correct);
+
+    const nextButton2 = screen.getByTestId('btn-next')
+    userEvent.click(nextButton2);
+
+    const correct2 = await screen.findByTestId('correct-answer')
+    userEvent.click(correct2);
+    userEvent.click(nextButton2);
+
+    const correct3 = await screen.findByTestId('correct-answer')
+    userEvent.click(correct3);
+    userEvent.click(nextButton2);
+
+    const correct4 = await screen.findByTestId('correct-answer')
+    userEvent.click(correct4);
+    userEvent.click(nextButton2);
+
+    const correct5 = await screen.findByTestId('correct-answer')
+    userEvent.click(correct5);
+    userEvent.click(nextButton2);
+
+    const feedbackPath2 = history.location.pathname
+    expect(feedbackPath2).toBe('/feedback')
+    screen.debug;
+    await waitFor( async () => {
+      expect(await screen.findByText('Well Done!')).toBeInTheDocument();
+    }, { timeout: 3999})
   })
 
   test('Testa a mudança de cor das bordas', async () => {
@@ -347,6 +933,7 @@ describe('Testa o componente game', () => {
 
   test('Testa se a cor das bordas muda ao esperarmos 30 segundos sem ação', async () => {
     const questions = {
+      response_code: 0,
       results: [
         {
           category: "Entertainment: Music",
@@ -430,6 +1017,7 @@ describe('Testa o componente game', () => {
 
   test('Testa o componente Game com fetch mockado', async () => {
     const questions = {
+      response_code: 0,
       results: [
         {
           category: "Entertainment: Music",
@@ -578,8 +1166,6 @@ describe('Testa o componente game', () => {
 
     const buttonPlay2 = screen.getByRole('button', { name: 'Play' })
     userEvent.click(buttonPlay2);
-    screen.debug();
-
 
     await waitFor(() => {
       const location = history.location.pathname
@@ -588,6 +1174,59 @@ describe('Testa o componente game', () => {
   })
 
   test('Testa a função changeIndex do componente Game', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
+    
     const { history } = renderWithRouterAndRedux(<App />);
 
     const typeName2 = 'danilo';

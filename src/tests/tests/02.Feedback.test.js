@@ -48,9 +48,60 @@ describe('Testa o componente Feedback.', () => {
   })
 
   test('5 - Verifica se o botão "Play Again" redireciona para Game ao ser clicado', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
 
     const { history } = renderWithRouterAndRedux(<App />);
-
 
     const typeName = 'triviers';
     const typeEmail = 'triviers@triviers.com'
@@ -64,14 +115,12 @@ describe('Testa o componente Feedback.', () => {
     const buttonPlay = screen.getByRole('button', { name: 'Play' })
     userEvent.click(buttonPlay);
     expect(await screen.findByText('triviers')).toBeInTheDocument();
-    console.log(history);
 
     const gamePath = history.location.pathname
     expect(gamePath).toBe('/game')
  
     const buttons = await screen.findAllByRole('button');
 
-    // fireEvent(buttons[1])
     userEvent.click(buttons[1]);
     const nextButton = screen.getByTestId('btn-next')
     userEvent.click(nextButton);
@@ -88,9 +137,6 @@ describe('Testa o componente Feedback.', () => {
     userEvent.click(buttonPlayAgain)
     const loginPath = history.location.pathname
     expect(loginPath).toBe('/')
-
-
-
   })
 
   test('6 - Verifica se a imagem do gravatar é mostrada', async () => {
@@ -166,9 +212,60 @@ describe('Testa o componente Feedback.', () => {
   })
 
   test('10 - Verifica se o botão "Ranking" redireciona para Ranking ao ser clicado', async () => {
+    const questions = {
+      response_code: 0,
+      results: [
+        {
+          category: "Entertainment: Music",
+          correct_answer: "Billie Joe Armstrong",
+          difficulty: "easy",
+          incorrect_answers: ["Mike Dirnt", "Sean Hughes", "Tr&eacute; Cool"],
+          question: "Who is the lead singer of Green Day?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Film",
+          correct_answer: "Wensleydale",
+          difficulty: "medium",
+          incorrect_answers: ["Cheddar", "Moon Cheese", "Edam"],
+          question: "What type of cheese, loved by Wallace and Gromit, had it&#039;s sale prices rise after their successful short films?",
+          type: "multiple",
+        },
+        {
+          category: "Entertainment: Video Games",
+          correct_answer: "False",
+          difficulty: "easy",
+          incorrect_answers: ["True"],
+          question: "In Heroes of the Storm, the Cursed Hollow map gimmick requires players to kill the undead to curse the enemy team.",
+          type: "boolean",
+        },
+        {
+          category: "Science: Mathematics",
+          correct_answer: "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+          difficulty: "easy",
+          incorrect_answers: ["Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+          "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+          "The order in which the operations are written."],
+          question: "What is the correct order of operations for solving equations?",
+          type: "multiple",
+        },
+        {
+          category: "Animals",
+          correct_answer: "Hemocyanin",
+          difficulty: "hard",
+          incorrect_answers: ["Cytochrome", "Iron", "Methionine"],
+          question: "What is the name of the copper-rich protein that creates the blue blood in the Antarctic octopus?",
+          type: "multiple",
+        },
+      ]
+    };
+
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questions),
+    });
 
     const { history } = renderWithRouterAndRedux(<App />);
-
 
     const typeName = 'triviers';
     const typeEmail = 'triviers@triviers.com'
@@ -182,16 +279,12 @@ describe('Testa o componente Feedback.', () => {
     const buttonPlay2 = screen.getByRole('button', { name: 'Play' })
     userEvent.click(buttonPlay2);
     expect(await screen.findByText('triviers')).toBeInTheDocument();
-    console.log(history);
 
     const gamePath2 = history.location.pathname
     expect(gamePath2).toBe('/game')
-    //------
-    // const correctAnswer = screen.findByTestId('correct-answer')
-    // expect(await correctAnswer).toBeInTheDocument();
+
     const buttons2 = await screen.findAllByRole('button');
 
-    // fireEvent(buttons[1])
     userEvent.click(buttons2[1]);
     const nextButton2 = screen.getByTestId('btn-next')
     userEvent.click(nextButton2);
@@ -208,28 +301,6 @@ describe('Testa o componente Feedback.', () => {
     userEvent.click(buttonRanking)
     const rankingPath = history.location.pathname
     expect(rankingPath).toBe('/ranking')
-
-
-    const buttonPlay = screen.getByRole('button', { name: 'Play' })
-    userEvent.click(buttonPlay);
-    expect(await screen.findByText('triviers')).toBeInTheDocument();
-    console.log(history);
-
-    const gamePath = history.location.pathname
-    expect(gamePath).toBe('/game')
- 
-    const buttons = await screen.findAllByRole('button');
-
-    userEvent.click(buttons[1]);
-    const nextButton = screen.getByTestId('btn-next')
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    userEvent.click(nextButton);
-    const feedbackPath = history.location.pathname
-
-    expect(feedbackPath).toBe('/feedback')
   })
 
 });
