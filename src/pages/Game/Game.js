@@ -173,11 +173,11 @@ class Game extends React.Component {
     };
 
     return (
-      <article>
+      <article className="game-article">
+        <Header />
         <span data-testid="timer">
           {timer}
         </span>
-        <Header />
         <section>
           <h1 data-testid="question-category">{category}</h1>
           <h3 data-testid="question-text">{question}</h3>

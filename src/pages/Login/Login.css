@@ -1,0 +1,66 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  background-color: #16161a;
+  animation: triviers-form 5s;
+}
+
+@keyframes triviers-form {
+  0% {
+    transform: translateY(0px);
+    opacity: 0%;
+}
+100% {
+    transform: translateX(0px);
+    opacity: 100%;
+}
+}
+
+form img {
+  width: 500px;
+  margin-bottom: 20px;
+}
+
+form label {
+  font-family: 'Roboto', sans-serif;
+  font-size:xx-large;
+  font-style: italic;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  color: #2cb67d;
+}
+
+form input {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  font-size: medium;
+  width: 250px;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.button-section {
+  display: flex;
+}
+
+.button-section button {
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-size: x-large;
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: #2cb67d;
+  color: #fffffe;
+  border-radius: 3px;
+}
+
+.button-section button:hover {
+  cursor: pointer;
+  opacity: 90%;
+}

@@ -5,6 +5,8 @@ import propTypes from 'prop-types';
 import getToken from '../../functions/api/getToken';
 import localStorage from '../../functions/localStorage/localStorage';
 import userInfo from '../../actions/userInfo';
+import Trivia from '../../images/Trivia(light mode).png';
+import './Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -49,6 +51,7 @@ class Login extends React.Component {
     const { name, email, disable } = this.state;
     return (
       <form>
+        <img src={ Trivia } alt="trivia team logo" />
         <label htmlFor="input-player-name">
           Name
           <input
@@ -71,22 +74,24 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
         </label>
-        <button
-          type="button"
-          data-testid="btn-play"
-          disabled={ disable }
-          onClick={ () => this.playFunction() }
-        >
-          Play
-        </button>
-        <Link to="/settings">
+        <section className="button-section">
           <button
             type="button"
-            data-testid="btn-settings"
+            data-testid="btn-play"
+            disabled={ disable }
+            onClick={ () => this.playFunction() }
           >
-            Settings
+            Play
           </button>
-        </Link>
+          <Link to="/settings">
+            <button
+              type="button"
+              data-testid="btn-settings"
+            >
+              Settings
+            </button>
+          </Link>
+        </section>
       </form>
     );
   }
