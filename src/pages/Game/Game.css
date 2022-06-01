@@ -1,74 +1,181 @@
-.red {
-  border: 3px solid red;
-  opacity: 50%;
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.green {
-  border: 3px solid rgb(6, 240, 15);
+@keyframes rainbowShadow {
+  0% {
+    box-shadow: 0 0 10px #2cb67d;
+  }
+  23% {
+    box-shadow: 0 0 10px rgb(221, 192, 0);
+  }
+  46% {
+    box-shadow: 0 0 10px rgb(221, 0, 110);
+  }
+  69% {
+    box-shadow: 0 0 10px rgb(97, 179, 255);
+  }
+  82% {
+    box-shadow: 0 0 10px rgb(237, 75, 75);
+  }
+  100% {
+    box-shadow: 0 0 10px rgb(95, 23, 158);
+  }
 }
 
-.game-section {
-  margin-top: 10%;
+@keyframes toBottom {
+  
+  0% {
+    opacity: 0%;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+}
+
+.game-article {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.timer {
+  font-family: retroica, sans-serif;
+  position: absolute;
+  left: 20px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s;
 }
 
 .timerGreen {
-  color:  #2cb67d;
-  font-family: 'Roboto', sans-serif;
-  font-size: xx-large;
-  font-style: italic;
-  font-weight: bold;
+  background-color:  #2cb67d;
 }
 
 .timerRed {
-  color: red;
-  font-family: 'Roboto', sans-serif;
-  font-size: xx-large;
-  font-style: italic;
-  font-weight: bold;
+  background-color: rgb(237, 75, 75);
+  color: white;
 }
 
 .timerYellow {
-  color: yellow;
-  font-family: 'Roboto', sans-serif;
-  font-size: xx-large;
-  font-style: italic;
-  font-weight: bold;
+  background-color: yellow;
 }
 
-.game-section h1 {
-  font-family: 'Roboto', sans-serif;
-  font-style: italic;
-  font-size: xx-large;
-  color: #2cb67d;
+.game-section {
+  padding: 110px 20px 20px;
 }
 
 .game-section h3 {
-  font-family: 'Roboto', sans-serif;
-  font-style: italic;
-  font-size: xx-large;
   color: #2cb67d;
+  font-weight: 300;
+  font-style: italic;
+  font-family: retroica, sans-serif;
 }
 
-.game-article button {
-  font-family: 'Roboto', sans-serif;
-  font-style: italic;
-  font-weight: bold;
-  font-size: x-large;
-  margin: 5px;
-  padding: 10px;
+.game-article .answer {
   background-color: #2cb67d;
-  color: black;
-  border-radius: 3px;
+  border-radius: 0.5em;
+  font-family: 'Roboto', sans-serif;
+  margin: 5px;
+  padding: 5px;
+  border: 3px solid #2cb67d;
+  box-shadow: 0 3px 0 #145a3d;
+  color: white;
+  margin: 10px 0;
+  cursor: pointer;
+  animation: fade 1s;
+  font-family: retroica, sans-serif;
 }
 
-.game-article button:disabled {
-  font-family: 'Roboto', sans-serif;
-  font-style: italic;
-  font-weight: bold;
-  font-size: x-large;
-  margin: 5px;
+.game-article .answer:active {
+  transform: translateY(5px);
+  box-shadow: none;
+}
+
+.game-article .answer:nth-child(1) {
+  animation: toBottom 0.5s;
+}
+
+.game-article .answer:nth-child(2) {
+  animation: toBottom 1s;
+}
+
+.game-article .answer:nth-child(3) {
+  animation: toBottom 1.5s;
+}
+
+.game-article .answer:nth-child(4) {
+  animation: toBottom 2s;
+}
+
+.game-article .red {
+  background-color: rgb(202, 202, 202);
+  border: 3px solid rgb(255, 0, 0);
+  opacity: 10%;
+  color: white;
+  box-shadow: 0 3px 0 rgb(255, 0, 0);
+  cursor: not-allowed;
+}
+
+.game-article .green {
+  border: 3px solid rgb(6, 240, 15);
+  cursor: default;
+}
+
+.quiz {
+  display: grid;
+  grid-template-rows: 2fr 2fr 0.5fr;
+  width: 40vw;
+  padding: 20px;
+  height: 70vh;
+  background-color: #282c34;
+  transition: 1s;
+  border-radius: 1em;
+  position: relative;
+  animation: fade 1s, rainbowShadow 5s infinite alternate;
+}
+
+.quiz span {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   padding: 10px;
+  border-top: 2px solid #2cb67d;
+  color: #2cb67d;
+  font-size: 0.8em;
+  font-weight: 100;
+  font-family: retroica, sans-serif;
+}
+
+.quiz h3 {
+  align-self: center;
+  color: white;
+}
+
+.answer-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-next {
   background-color: #2cb67d;
-  color: black;
-  border-radius: 3px;
+  border: none;
+  justify-self: end;
+  align-self: end;
+  cursor: pointer;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
 }

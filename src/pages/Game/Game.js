@@ -6,6 +6,7 @@ import Header from '../../components/Header';
 import './Game.css';
 import scoreUpdate from '../../actions/scoreUpdate';
 import saveRanking from '../../functions/localStorage/rankingStorage';
+import tF from '../../functions/formatation/textFormat';
 
 const correctId = 'correct-answer';
 class Game extends React.Component {
@@ -46,9 +47,7 @@ class Game extends React.Component {
       this.setState((prevState) => ({
         timer: prevState.timer - 1,
       }));
-    } else {
-      this.setState({ colorBorder: true, next: true });
-    }
+    } else this.setState({ colorBorder: true, next: true });
   }
 
   verifyToken = async () => {
@@ -70,15 +69,11 @@ class Game extends React.Component {
         difficulty: questionsReturn.results[index].difficulty,
         correct: questionsReturn.results[index].correct_answer,
         answers: [
-          {
-            answer: questionsReturn.results[index].correct_answer,
-            id: correctId,
-          },
+          { answer: questionsReturn.results[index].correct_answer,
+            id: correctId },
           ...questionsReturn.results[index].incorrect_answers.map(
-            (iAnswer, i) => ({
-              answer: iAnswer,
-              id: `wrong-answer-${i}`,
-            }),
+            (iAnswer, i) => ({ answer: iAnswer,
+              id: `wrong-answer-${i}` }),
           ),
         ].sort(() => number.half - Math.random()),
         question: questionsReturn.results[index].question,
@@ -87,10 +82,8 @@ class Game extends React.Component {
   };
 
   border = (answer, correctA) => {
-    if (answer === correctA) {
-      return 'green';
-    }
-    return 'red';
+    if (answer === correctA) return 'answer green';
+    return 'answer red';
   };
 
   selectAnswer = (event) => {
@@ -147,10 +140,8 @@ class Game extends React.Component {
       difficulty: questions.results[prevState.index].difficulty,
       correct: questions.results[prevState.index].correct_answer,
       answers: [
-        {
-          answer: questions.results[prevState.index].correct_answer,
-          id: correctId,
-        },
+        { answer: questions.results[prevState.index].correct_answer,
+          id: correctId },
         ...questions.results[prevState.index].incorrect_answers.map(
           (iAnswer, i) => ({
             answer: iAnswer,
@@ -164,9 +155,9 @@ class Game extends React.Component {
 
   changeColor = (timer) => {
     const n = { five: 5, ten: 10 };
-    if (timer <= n.five) return 'timerRed';
-    if (timer <= n.ten) return 'timerYellow';
-    return 'timerGreen';
+    if (timer <= n.five) return 'timer timerRed';
+    if (timer <= n.ten) return 'timer timerYellow';
+    return 'timer timerGreen';
   }
 
   render() {
@@ -189,10 +180,10 @@ class Game extends React.Component {
           <span data-testid="timer" className={ this.changeColor(timer) }>
             {timer}
           </span>
-          <section>
-            <h1 data-testid="question-category">{category}</h1>
-            <h3 data-testid="question-text">{question}</h3>
-            <section data-testid="answer-options">
+          <section className="quiz">
+            <span data-testid="question-category">{category}</span>
+            <h3 data-testid="question-text">{tF(question)}</h3>
+            <section data-testid="answer-options" className="answer-options">
               {answers.map((a, i) => (
                 <button
                   data-testid={ a.id }
@@ -200,25 +191,26 @@ class Game extends React.Component {
                   key={ i }
                   type="button"
                   className={
-                    colorBorder ? this.border(a.answer, correctAnswer()) : ''
+                    colorBorder ? this.border(a.answer, correctAnswer()) : 'answer'
                   }
                   onClick={ (event) => this.selectAnswer(event) }
                   disabled={ colorBorder }
                 >
-                  {a.answer}
+                  {tF(a.answer)}
                 </button>
               ))}
             </section>
+            { next && (
+              <button
+                type="button"
+                data-testid="btn-next"
+                onClick={ () => this.changeIndex() }
+                className="btn-next"
+              >
+                Next
+              </button>
+            )}
           </section>
-          { next && (
-            <button
-              type="button"
-              data-testid="btn-next"
-              onClick={ () => this.changeIndex() }
-            >
-              Next
-            </button>
-          )}
         </section>
       </article>
     );

@@ -31,37 +31,45 @@ class Feedback extends Component {
     return (
       <article className="feedback-article">
         <Header />
-        <h1 data-testid="feedback-text">{feedback}</h1>
-        <h3 data-testid="feedback-total-score">
-          {score}
-          {' '}
-          points!
-        </h3>
-        <h3 data-testid="feedback-total-question">
-          {assertions}
-          {' '}
-          assertions!
-        </h3>
-        <button
-          type="button"
-          data-testid="btn-play-again"
-          onClick={ () => {
-            scorePoints(0);
-            history.push('/');
-          } }
-        >
-          Play Again
-        </button>
-        <button
-          type="button"
-          data-testid="btn-ranking"
-          onClick={ () => {
-            scorePoints(0);
-            history.push('/ranking');
-          } }
-        >
-          Ranking
-        </button>
+        <section className="feedback-section">
+          <h1 data-testid="feedback-text">{feedback}</h1>
+          <section className="points-feedback">
+            <h3 data-testid="feedback-total-score">
+              {score}
+              {' '}
+              points!
+            </h3>
+            <h3 data-testid="feedback-total-question">
+              {assertions}
+              {' '}
+              assertions!
+            </h3>
+          </section>
+          <section className="buttons-feedback">
+            <button
+              type="button"
+              data-testid="btn-play-again"
+              onClick={ () => {
+                scorePoints(0);
+                history.push('/');
+              } }
+              className="btn-play"
+            >
+              Play Again
+            </button>
+            <button
+              type="button"
+              data-testid="btn-ranking"
+              onClick={ () => {
+                scorePoints(0);
+                history.push('/ranking');
+              } }
+              className="btn-ranking"
+            >
+              Ranking
+            </button>
+          </section>
+        </section>
       </article>
     );
   }

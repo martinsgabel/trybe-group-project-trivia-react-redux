@@ -1,26 +1,69 @@
-.feedback-article h1 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 100px;
-  font-style: italic;
-  color: #2cb67d;
+@keyframes rainbowBorder {
+  0% {
+    border: 5px dotted #2cb67d;
+  }
+  23% {
+    border: 5px dotted rgb(221, 192, 0);
+  }
+  46% {
+    border: 5px dotted rgb(221, 0, 110);
+  }
+  69% {
+    border: 5px dotted rgb(97, 179, 255);
+  }
+  82% {
+    border: 5px dotted rgb(237, 75, 75);
+  }
+  100% {
+    border: 5px dotted rgb(95, 23, 158);
+  }
 }
 
-.feedback-article h3 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 50px;
-  font-style: italic;
-  color: #2cb67d;
+.feedback-article {
+  padding-top: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
-.feedback-article button {
-  font-family: 'Roboto', sans-serif;
-  font-style: italic;
-  font-size: x-large;
-  font-weight: bold;
-  margin: 5px;
-  padding: 10px;
-  border: none;
-  background-color: #2cb67d;
-  color: black;
-  border-radius: 3px;
+.feedback-section {
+  min-width: 50vw;
+  min-height: 50vh;
+  animation: rainbowBorder 5s infinite alternate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  font-family: retroica, sans-serif;
+  font-weight: 100;
+}
+
+.feedback-section h1 {
+  font-size: 2em;
+}
+
+.feedback-section button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  cursor: pointer;
+  border-radius: 0.5em;
+  font-family: retroica, sans-serif;
+  color: #16161a;
+}
+
+.feedback-section button:hover {
+  opacity: 0.8;
+}
+
+.feedback-section button:active {
+  transform: translateY(5px);
+  box-shadow: none;
+}
+
+.btn-ranking {
+  background-color: rgb(221, 192, 0);
+  border: 0;
+  box-shadow: 0 5px 0 #5a5014;
 }
