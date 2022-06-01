@@ -70,14 +70,12 @@ class Game extends React.Component {
         difficulty: questionsReturn.results[index].difficulty,
         correct: questionsReturn.results[index].correct_answer,
         answers: [
-          {
-            answer: questionsReturn.results[index].correct_answer,
-            id: correctId
-          },
+          { answer: questionsReturn.results[index].correct_answer,
+            id: correctId },
           ...questionsReturn.results[index].incorrect_answers.map(
             (iAnswer, i) => ({
               answer: iAnswer,
-              id: `wrong-answer-${i}`
+              id: `wrong-answer-${i}`,
             }),
           ),
         ].sort(() => number.half - Math.random()),
@@ -133,7 +131,7 @@ class Game extends React.Component {
         index: prevState.index + 1,
         colorBorder: false,
         timer: 30,
-        next: false
+        next: false,
       }));
       this.changeState();
     }
@@ -147,9 +145,8 @@ class Game extends React.Component {
       difficulty: questions.results[prevState.index].difficulty,
       correct: questions.results[prevState.index].correct_answer,
       answers: [
-        {
-          answer: questions.results[prevState.index].correct_answer,
-          id: correctId
+        { answer: questions.results[prevState.index].correct_answer,
+          id: correctId,
         },
         ...questions.results[prevState.index].incorrect_answers.map(
           (iAnswer, i) => ({
@@ -186,7 +183,7 @@ class Game extends React.Component {
       <article className="game-article">
         <Header />
         <section className="game-section">
-          <span data-testid="timer" className={this.changeColor(timer)}>
+          <span data-testid="timer" className={ this.changeColor(timer) }>
             {timer}
           </span>
           <section className="quiz">
@@ -195,15 +192,15 @@ class Game extends React.Component {
             <section data-testid="answer-options" className="answer-options">
               {answers.map((a, i) => (
                 <button
-                  data-testid={a.id}
-                  name={a.answer}
-                  key={i}
+                  data-testid={ a.id }
+                  name={ a.answer }
+                  key={ i }
                   type="button"
                   className={
                     colorBorder ? this.border(a.answer, correctAnswer()) : 'answer'
                   }
-                  onClick={(event) => this.selectAnswer(event)}
-                  disabled={colorBorder}
+                  onClick={ (event) => this.selectAnswer(event) }
+                  disabled={ colorBorder }
                 >
                   {tF(a.answer)}
                 </button>
@@ -213,7 +210,7 @@ class Game extends React.Component {
               <button
                 type="button"
                 data-testid="btn-next"
-                onClick={() => this.changeIndex()}
+                onClick={ () => this.changeIndex() }
                 className="btn-next"
               >
                 Next
