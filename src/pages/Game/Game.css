@@ -122,10 +122,10 @@
 
 .game-article .red {
   background-color: rgb(202, 202, 202);
-  border: 3px solid rgb(255, 0, 0);
-  opacity: 10%;
-  color: white;
-  box-shadow: 0 3px 0 rgb(255, 0, 0);
+  border: 3px solid red;
+  opacity: 30%;
+  color: red;
+  box-shadow: 0 3px 0 red;
   cursor: not-allowed;
 }
 
