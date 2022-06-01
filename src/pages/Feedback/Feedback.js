@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from '../../components/Header';
 import scoreUpdate from '../../actions/scoreUpdate';
+import reset from '../../actions/reset';
 import './Feedback.css';
 
 // Triviers number one no mercado da Trybe.
@@ -27,7 +28,7 @@ class Feedback extends Component {
 
   render() {
     const { feedback } = this.state;
-    const { score, assertions, history, scorePoints } = this.props;
+    const { score, assertions, history, scorePoints, reset } = this.props;
     return (
       <article className="feedback-article">
         <Header />
@@ -49,10 +50,10 @@ class Feedback extends Component {
             <button
               type="button"
               data-testid="btn-play-again"
-              onClick={ () => {
-                scorePoints(0);
+              onClick={() => {
+                reset();
                 history.push('/');
-              } }
+              }}
               className="btn-play"
             >
               Play Again
@@ -60,10 +61,10 @@ class Feedback extends Component {
             <button
               type="button"
               data-testid="btn-ranking"
-              onClick={ () => {
-                scorePoints(0);
+              onClick={() => {
+                reset();
                 history.push('/ranking');
-              } }
+              }}
               className="btn-ranking"
             >
               Ranking
@@ -82,6 +83,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   scorePoints: (state) => dispatch(scoreUpdate(state)),
+  reset: (state) => dispatch(reset(state))
 });
 
 Feedback.propTypes = {
@@ -91,6 +93,7 @@ Feedback.propTypes = {
     push: propTypes.func,
   }).isRequired,
   scorePoints: propTypes.func.isRequired,
+  reset: propTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
