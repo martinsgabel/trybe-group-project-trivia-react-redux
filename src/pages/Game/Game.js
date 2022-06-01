@@ -70,10 +70,8 @@ class Game extends React.Component {
         difficulty: questionsReturn.results[index].difficulty,
         correct: questionsReturn.results[index].correct_answer,
         answers: [
-          {
-            answer: questionsReturn.results[index].correct_answer,
-            id: correctId,
-          },
+          { answer: questionsReturn.results[index].correct_answer,
+            id: correctId },
           ...questionsReturn.results[index].incorrect_answers.map(
             (iAnswer, i) => ({
               answer: iAnswer,
@@ -148,8 +146,7 @@ class Game extends React.Component {
       difficulty: questions.results[prevState.index].difficulty,
       correct: questions.results[prevState.index].correct_answer,
       answers: [
-        {
-          answer: questions.results[prevState.index].correct_answer,
+        { answer: questions.results[prevState.index].correct_answer,
           id: correctId,
         },
         ...questions.results[prevState.index].incorrect_answers.map(
