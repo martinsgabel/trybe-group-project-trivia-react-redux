@@ -123,14 +123,11 @@ class Game extends React.Component {
       if (ranking.length === 0) {
         const newRanking = [{ name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
         saveRanking(newRanking);
-
       } else {
         const newRanking = [...ranking, { name, score: scorePoints, picture: `https://www.gravatar.com/avatar/${emailCrypto}` }];
         saveRanking(newRanking);
       }
-
       history.push('/feedback');
-
     } else {
       this.setState((prevState) => ({
         index: prevState.index + 1,

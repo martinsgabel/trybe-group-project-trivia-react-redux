@@ -28,7 +28,7 @@ class Feedback extends Component {
 
   render() {
     const { feedback } = this.state;
-    const { score, assertions, history, scorePoints, reset } = this.props;
+    const { score, assertions, history, reset } = this.props;
     return (
       <article className="feedback-article">
         <Header />
