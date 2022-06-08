@@ -6,6 +6,7 @@ export default function tF(text) {
     .replace(/&uuml;/g, 'ü')
     .replace(/&ocirc;/g, 'ô')
     .replace(/&ldquo;/g, '“')
-    .replace(/&rdquo;;/g, '”')
+    .replace(/&rdquo;/g, '”')
+    .replace(/&rsquo;/g, '\'')
     .replace(/&acirc;/g, 'â');
 }

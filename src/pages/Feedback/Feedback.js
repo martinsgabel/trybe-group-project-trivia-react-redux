@@ -28,7 +28,7 @@ class Feedback extends Component {
 
   render() {
     const { feedback } = this.state;
-    const { score, assertions, history, reset } = this.props;
+    const { score, assertions, history, resetScore } = this.props;
     return (
       <article className="feedback-article">
         <Header />
@@ -50,10 +50,10 @@ class Feedback extends Component {
             <button
               type="button"
               data-testid="btn-play-again"
-              onClick={() => {
+              onClick={ () => {
                 reset();
                 history.push('/');
-              }}
+              } }
               className="btn-play"
             >
               Play Again
@@ -61,10 +61,10 @@ class Feedback extends Component {
             <button
               type="button"
               data-testid="btn-ranking"
-              onClick={() => {
-                reset();
+              onClick={ () => {
+                resetScore();
                 history.push('/ranking');
-              }}
+              } }
               className="btn-ranking"
             >
               Ranking
@@ -83,7 +83,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   scorePoints: (state) => dispatch(scoreUpdate(state)),
-  reset: (state) => dispatch(reset(state))
+  resetScore: (state) => dispatch(reset(state)),
 });
 
 Feedback.propTypes = {
@@ -92,8 +92,7 @@ Feedback.propTypes = {
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
-  scorePoints: propTypes.func.isRequired,
-  reset: propTypes.func.isRequired,
+  resetScore: propTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);

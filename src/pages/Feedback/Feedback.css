@@ -1,3 +1,15 @@
+@keyframes toBottom {
+  
+  0% {
+    opacity: 0%;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+}
+
 @keyframes rainbowBorder {
   0% {
     border: 5px dotted #2cb67d;
@@ -30,7 +42,8 @@
 .feedback-section {
   min-width: 50vw;
   min-height: 50vh;
-  animation: rainbowBorder 5s infinite alternate;
+  animation: toBottom 1s,
+    rainbowBorder 5s infinite alternate;
   display: flex;
   flex-direction: column;
   align-items: center;

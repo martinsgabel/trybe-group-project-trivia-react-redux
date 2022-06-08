@@ -1,3 +1,15 @@
+@keyframes toRight {
+  
+  0% {
+    opacity: 0%;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateX(0);
+  }
+}
+
 .heading-section {
   background-color: #282c34;
   color: white;
@@ -8,7 +20,10 @@
 }
 
 .podio-ranking {
-  padding: 90px 0;
+  padding: 180px 0 90px;
+  font-family: retroica, sans-serif;
+  list-style: none;
+  animation: toRight 1s;
 }
 
 .header-detail {
@@ -28,11 +43,6 @@
 .heading-section button:active {
   box-shadow: none;
   transform: translateY(5px);
-}
-
-ul {
-  font-family: retroica, sans-serif;
-  list-style: none;
 }
 
 .player-name-ranking {
@@ -77,7 +87,6 @@ ul h3 {
   flex-direction: column-reverse;
   height: 400px;
   justify-content: center;
-  margin: 90px auto;
   padding: 20px;
   position: relative;
   transform: translateX(200px);
@@ -125,7 +134,6 @@ ul h3 {
   flex-direction: column-reverse;
   height: 350px;
   justify-content: center;
-  margin: 90px 0;
   opacity: 90%;
   padding: 20px;
   position: relative;
@@ -165,7 +173,6 @@ ul h3 {
   flex-direction: column-reverse;
   height: 300px;
   justify-content: center;
-  margin: 90px 0;
   opacity: 90%;
   padding: 20px;
   position: relative;
@@ -189,4 +196,8 @@ ul h3 {
   margin: 10px 0;
   order: 0;
   width: 50px;
+}
+
+.item-ranking:nth-child(4) {
+  margin-top: 90px;
 }

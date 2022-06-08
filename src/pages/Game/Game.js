@@ -75,8 +75,7 @@ class Game extends React.Component {
           ...questionsReturn.results[index].incorrect_answers.map(
             (iAnswer, i) => ({
               answer: iAnswer,
-              id: `wrong-answer-${i}`,
-            }),
+              id: `wrong-answer-${i}` }),
           ),
         ].sort(() => number.half - Math.random()),
         question: questionsReturn.results[index].question,
@@ -97,17 +96,14 @@ class Game extends React.Component {
   ponctuationFunction = (event) => {
     const number = { one: 1, two: 2, three: 3, ten: 10 };
     const { correct, difficulty, timer } = this.state;
-    const { score } = this.props;
+    const { dispatch } = this.props;
     if (event.target.name === correct) {
       if (difficulty === 'hard') {
-        const scorePoints = number.ten + (timer * number.three);
-        score(scorePoints);
+        dispatch(scoreUpdate(number.ten + (timer * number.three)));
       } else if (difficulty === 'medium') {
-        const scorePoints = number.ten + (timer * number.two);
-        score(scorePoints);
+        dispatch(scoreUpdate(number.ten + (timer * number.two)));
       } else {
-        const scorePoints = number.ten + (timer * number.one);
-        score(scorePoints);
+        dispatch(scoreUpdate(number.ten + (timer * number.one)));
       }
     }
   }
@@ -131,8 +127,7 @@ class Game extends React.Component {
         index: prevState.index + 1,
         colorBorder: false,
         timer: 30,
-        next: false,
-      }));
+        next: false }));
       this.changeState();
     }
   }
@@ -146,8 +141,7 @@ class Game extends React.Component {
       correct: questions.results[prevState.index].correct_answer,
       answers: [
         { answer: questions.results[prevState.index].correct_answer,
-          id: correctId,
-        },
+          id: correctId },
         ...questions.results[prevState.index].incorrect_answers.map(
           (iAnswer, i) => ({
             answer: iAnswer,
@@ -167,7 +161,8 @@ class Game extends React.Component {
   }
 
   render() {
-    const { answers, category, question, colorBorder, timer, next } = this.state;
+    const { answers, category, question,
+      colorBorder, timer, next, difficulty } = this.state;
 
     const correctAnswerElement = answers.find(
       (answer) => answer.id === 'correct-answer',
@@ -186,8 +181,20 @@ class Game extends React.Component {
           <span data-testid="timer" className={ this.changeColor(timer) }>
             {timer}
           </span>
-          <section className="quiz">
-            <span data-testid="question-category">{category}</span>
+          <section className={ `quiz q-${difficulty}` }>
+            {question === '' && <p className="loading" />}
+            <span
+              className={ `c-${difficulty}` }
+              data-testid="question-category"
+            >
+              {category}
+            </span>
+            <span
+              className={ difficulty }
+              data-testid="question-difficulty"
+            >
+              {difficulty}
+            </span>
             <h3 data-testid="question-text">{tF(question)}</h3>
             <section data-testid="answer-options" className="answer-options">
               {answers.map((a, i) => (
@@ -211,7 +218,7 @@ class Game extends React.Component {
                 type="button"
                 data-testid="btn-next"
                 onClick={ () => this.changeIndex() }
-                className="btn-next"
+                className={ `btn-next n-${difficulty}` }
               >
                 Next
               </button>
@@ -223,10 +230,6 @@ class Game extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  score: (state) => dispatch(scoreUpdate(state)),
-});
-
 const mapStateToProps = (state) => ({
   name: state.player.name,
   scorePoints: state.player.score,
@@ -237,10 +240,10 @@ Game.propTypes = {
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
-  score: propTypes.func.isRequired,
+  dispatch: propTypes.func.isRequired,
   name: propTypes.string.isRequired,
   scorePoints: propTypes.number.isRequired,
   email: propTypes.string.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps)(Game);
