@@ -28,7 +28,7 @@ class Ranking extends React.Component {
     const { ranking } = this.state;
     return (
       <article className="ranking-article">
-        <section className="heading-section">
+        <header className="heading-section">
           <h1 className="heading" data-testid="ranking-title">Ranking</h1>
           <button
             type="button"
@@ -37,20 +37,27 @@ class Ranking extends React.Component {
           >
             Logout
           </button>
-        </section>
+          <div className="header-detail">
+            <div className="detail-pink" />
+            <div className="detail-yellow" />
+            <div className="detail-blue" />
+            <div className="detail-green" />
+            <div className="detail-red" />
+            <div className="detail-purple" />
+          </div>
+        </header>
         { ranking.length === 0 ? <h1>Não há jogadores aqui</h1> : (
-          <ul>
+          <ul className="podio-ranking">
             { ranking.map((player, i) => (
-              <li key={ player.name }>
-                <div>
-                  <h1
-                    className="player-name-ranking"
-                    data-testid={ `player-name-${i}` }
-                  >
-                    { player.name }
-                  </h1>
-                  <h3 data-testid={ `player-score-${i}` }>{ player.score }</h3>
-                </div>
+              <li key={ player.name } className={ `item-ranking r${ranking.length}` }>
+                <span className="order">{i + 1}</span>
+                <h3 data-testid={ `player-score-${i}` }>{ player.score }</h3>
+                <h1
+                  className="player-name-ranking"
+                  data-testid={ `player-name-${i}` }
+                >
+                  { player.name }
+                </h1>
                 <img
                   src={ player.picture }
                   alt={ `${player.name} pic` }

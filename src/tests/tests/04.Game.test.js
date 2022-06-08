@@ -82,7 +82,6 @@ describe('Testa o componente game', () => {
     expect(gamePath).toBe('/game')
 
     expect(await screen.findByTestId('question-category'));
-    expect(await screen.findByRole('heading', { level: 1 }))
   })
 
   test('Testa se a pergunta está sendo exibida', async () => {

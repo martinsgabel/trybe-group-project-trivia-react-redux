@@ -6,6 +6,7 @@ import Header from '../../components/Header';
 import './Game.css';
 import scoreUpdate from '../../actions/scoreUpdate';
 import saveRanking from '../../functions/localStorage/rankingStorage';
+import tF from '../../functions/formatation/textFormat';
 
 const correctId = 'correct-answer';
 class Game extends React.Component {
@@ -29,6 +30,7 @@ class Game extends React.Component {
   componentDidMount = async () => {
     await this.verifyToken();
     this.getRanking();
+
     const second = 1000;
     this.timerID = setInterval(
       () => this.tick(), second,
@@ -46,9 +48,7 @@ class Game extends React.Component {
       this.setState((prevState) => ({
         timer: prevState.timer - 1,
       }));
-    } else {
-      this.setState({ colorBorder: true, next: true });
-    }
+    } else this.setState({ colorBorder: true, next: true });
   }
 
   verifyToken = async () => {
@@ -70,15 +70,12 @@ class Game extends React.Component {
         difficulty: questionsReturn.results[index].difficulty,
         correct: questionsReturn.results[index].correct_answer,
         answers: [
-          {
-            answer: questionsReturn.results[index].correct_answer,
-            id: correctId,
-          },
+          { answer: questionsReturn.results[index].correct_answer,
+            id: correctId },
           ...questionsReturn.results[index].incorrect_answers.map(
             (iAnswer, i) => ({
               answer: iAnswer,
-              id: `wrong-answer-${i}`,
-            }),
+              id: `wrong-answer-${i}` }),
           ),
         ].sort(() => number.half - Math.random()),
         question: questionsReturn.results[index].question,
@@ -87,10 +84,8 @@ class Game extends React.Component {
   };
 
   border = (answer, correctA) => {
-    if (answer === correctA) {
-      return 'green';
-    }
-    return 'red';
+    if (answer === correctA) return 'answer green';
+    return 'answer red';
   };
 
   selectAnswer = (event) => {
@@ -101,17 +96,14 @@ class Game extends React.Component {
   ponctuationFunction = (event) => {
     const number = { one: 1, two: 2, three: 3, ten: 10 };
     const { correct, difficulty, timer } = this.state;
-    const { score } = this.props;
+    const { dispatch } = this.props;
     if (event.target.name === correct) {
       if (difficulty === 'hard') {
-        const scorePoints = number.ten + (timer * number.three);
-        score(scorePoints);
+        dispatch(scoreUpdate(number.ten + (timer * number.three)));
       } else if (difficulty === 'medium') {
-        const scorePoints = number.ten + (timer * number.two);
-        score(scorePoints);
+        dispatch(scoreUpdate(number.ten + (timer * number.two)));
       } else {
-        const scorePoints = number.ten + (timer * number.one);
-        score(scorePoints);
+        dispatch(scoreUpdate(number.ten + (timer * number.one)));
       }
     }
   }
@@ -131,7 +123,8 @@ class Game extends React.Component {
       }
       history.push('/feedback');
     } else {
-      this.setState((prevState) => ({ index: prevState.index + 1,
+      this.setState((prevState) => ({
+        index: prevState.index + 1,
         colorBorder: false,
         timer: 30,
         next: false }));
@@ -147,10 +140,8 @@ class Game extends React.Component {
       difficulty: questions.results[prevState.index].difficulty,
       correct: questions.results[prevState.index].correct_answer,
       answers: [
-        {
-          answer: questions.results[prevState.index].correct_answer,
-          id: correctId,
-        },
+        { answer: questions.results[prevState.index].correct_answer,
+          id: correctId },
         ...questions.results[prevState.index].incorrect_answers.map(
           (iAnswer, i) => ({
             answer: iAnswer,
@@ -164,13 +155,14 @@ class Game extends React.Component {
 
   changeColor = (timer) => {
     const n = { five: 5, ten: 10 };
-    if (timer <= n.five) return 'timerRed';
-    if (timer <= n.ten) return 'timerYellow';
-    return 'timerGreen';
+    if (timer <= n.five) return 'timer timerRed';
+    if (timer <= n.ten) return 'timer timerYellow';
+    return 'timer timerGreen';
   }
 
   render() {
-    const { answers, category, question, colorBorder, timer, next } = this.state;
+    const { answers, category, question,
+      colorBorder, timer, next, difficulty } = this.state;
 
     const correctAnswerElement = answers.find(
       (answer) => answer.id === 'correct-answer',
@@ -189,10 +181,22 @@ class Game extends React.Component {
           <span data-testid="timer" className={ this.changeColor(timer) }>
             {timer}
           </span>
-          <section>
-            <h1 data-testid="question-category">{category}</h1>
-            <h3 data-testid="question-text">{question}</h3>
-            <section data-testid="answer-options">
+          <section className={ `quiz q-${difficulty}` }>
+            {question === '' && <p className="loading" />}
+            <span
+              className={ `c-${difficulty}` }
+              data-testid="question-category"
+            >
+              {category}
+            </span>
+            <span
+              className={ difficulty }
+              data-testid="question-difficulty"
+            >
+              {difficulty}
+            </span>
+            <h3 data-testid="question-text">{tF(question)}</h3>
+            <section data-testid="answer-options" className="answer-options">
               {answers.map((a, i) => (
                 <button
                   data-testid={ a.id }
@@ -200,34 +204,31 @@ class Game extends React.Component {
                   key={ i }
                   type="button"
                   className={
-                    colorBorder ? this.border(a.answer, correctAnswer()) : ''
+                    colorBorder ? this.border(a.answer, correctAnswer()) : 'answer'
                   }
                   onClick={ (event) => this.selectAnswer(event) }
                   disabled={ colorBorder }
                 >
-                  {a.answer}
+                  {tF(a.answer)}
                 </button>
               ))}
             </section>
+            {next && (
+              <button
+                type="button"
+                data-testid="btn-next"
+                onClick={ () => this.changeIndex() }
+                className={ `btn-next n-${difficulty}` }
+              >
+                Next
+              </button>
+            )}
           </section>
-          { next && (
-            <button
-              type="button"
-              data-testid="btn-next"
-              onClick={ () => this.changeIndex() }
-            >
-              Next
-            </button>
-          )}
         </section>
       </article>
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  score: (state) => dispatch(scoreUpdate(state)),
-});
 
 const mapStateToProps = (state) => ({
   name: state.player.name,
@@ -239,10 +240,10 @@ Game.propTypes = {
   history: propTypes.shape({
     push: propTypes.func,
   }).isRequired,
-  score: propTypes.func.isRequired,
+  dispatch: propTypes.func.isRequired,
   name: propTypes.string.isRequired,
   scorePoints: propTypes.number.isRequired,
   email: propTypes.string.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps)(Game);

@@ -50,49 +50,57 @@ class Login extends React.Component {
   render() {
     const { name, email, disable } = this.state;
     return (
-      <form>
+      <main className="main-login">
         <img src={ Trivia } alt="trivia team logo" />
-        <label htmlFor="input-player-name">
-          Name
-          <input
-            type="text"
-            name="name"
-            value={ name }
-            data-testid="input-player-name"
-            id="input-player-name"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="input-gravatar-email">
-          E-mail
-          <input
-            type="email"
-            name="email"
-            value={ email }
-            data-testid="input-gravatar-email"
-            id="input-gravatar-email"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <section className="button-section">
-          <button
-            type="button"
-            data-testid="btn-play"
-            disabled={ disable }
-            onClick={ () => this.playFunction() }
-          >
-            Play
-          </button>
-          <Link to="/settings">
+        <form>
+          <label htmlFor="input-player-name">
+            Name
+            <input
+              type="text"
+              name="name"
+              value={ name }
+              data-testid="input-player-name"
+              id="input-player-name"
+              onChange={ this.handleChange }
+              placeholder="Name"
+            />
+          </label>
+          <label htmlFor="input-gravatar-email">
+            E-mail
+            <input
+              type="email"
+              name="email"
+              value={ email }
+              data-testid="input-gravatar-email"
+              id="input-gravatar-email"
+              onChange={ this.handleChange }
+              placeholder="E-mail"
+            />
+          </label>
+          <section className="button-section">
             <button
               type="button"
-              data-testid="btn-settings"
+              data-testid="btn-play"
+              disabled={ disable }
+              onClick={ this.playFunction }
+              className="btn-play"
+              spellCheck="false"
             >
-              Settings
+              Play
             </button>
-          </Link>
-        </section>
-      </form>
+            <Link to="/settings">
+              <button
+                type="button"
+                data-testid="btn-settings"
+                className="btn-settings"
+                spellCheck="false"
+              >
+                Settings
+              </button>
+            </Link>
+          </section>
+        </form>
+      </main>
     );
   }
 }

@@ -1,34 +1,107 @@
+@keyframes rainbow {
+  0% {
+    border: 1px solid #2cb67d;
+  }
+  23% {
+    border: 1px solid rgb(221, 192, 0);
+  }
+  46% {
+    border: 1px solid rgb(221, 0, 110);
+  }
+  69% {
+    border: 1px solid rgb(97, 179, 255);
+  }
+  82% {
+    border: 1px solid rgb(237, 75, 75);
+  }
+  100% {
+    border: 1px solid rgb(95, 23, 158);
+  }
+}
+
 header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  background-color: #282c34;
+  display: grid;
+  grid-template-columns: 4fr 1fr 4fr;
   margin: 0;
-  background-color: #7f5af0;
-  padding: 50px;
+  padding: 15px 40px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 90px;
 }
 
 header span {
-  font-family: 'Roboto', sans-serif;
-  font-style: italic;
-  font-size: x-large;
-  font-weight: bold;
-  padding: 5px;
-  color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  padding: 5px 10px;
 }
 
 .trivia-logo {
-  width: 200px;
-  padding: 20px;
+  height: 60px;
+}
+
+header span:nth-child(2) {
+  background-color: #282c34;
+  animation: rainbow 5s infinite alternate;
+  border-radius: 25px;
+  font-family: retroica, sans-serif;
 }
 
 .profile-picture-header {
-  width: 100px;
-  border-radius: 40px;
-  margin-left: 15px;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
 }
 
 .player-info-header {
-  margin-right: 40px;
-  display: flex;
   align-items: center;
+  display: flex;
+  justify-self: flex-end;
+  font-family: retroica, sans-serif;
+}
+
+.player-info-header span {
+  font-size: 0.8em;
+  font-family: retroica, sans-serif;
+}
+
+.header-detail {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  height: 3px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.detail-pink {
+  background-color: rgb(221, 0, 110);
+  height: 100%;
+}
+
+.detail-yellow {
+  background-color: rgb(221, 192, 0);
+  height: 100%;
+}
+
+.detail-blue {
+  background-color: rgb(97, 179, 255);
+  height: 100%;
+}
+
+.detail-green {
+  background-color: rgb(51, 146, 115);
+  height: 100%;
+}
+
+.detail-red {
+  background-color: rgb(237, 75, 75);
+  height: 100%;
+}
+
+.detail-purple {
+  background-color: rgb(95, 23, 158);
+  height: 100%;
 }
